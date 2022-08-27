@@ -1,12 +1,16 @@
-// import React from "react"
+import React from "react"
 
-// import Header from "./Header.js"
-// import LoginForm from "./LoginForm.js"
+import Header from "../components/Header.js"
+import LoginForm from "../components/LoginForm.js"
 
-// export const LandingView = () => {
+const LandingView = () => {
 
-//     return(
-//         <Header />
-//         <LoginForm />
-//     )
-// }
+    return(
+        <>
+        <Header />
+        <LoginForm />
+        </>
+    )
+}
+
+export default LandingView
