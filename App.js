@@ -1,4 +1,3 @@
-import { StyleSheet, Text, View } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator} from '@react-navigation/native-stack'
 import PartyView from "./src/views/PartyView"
@@ -21,14 +20,5 @@ export default function App() {
         <Stack.Screen name='Party' component={PartyView} />
       </Stack.Navigator>
     </NavigationContainer>
-  );
+  )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})
