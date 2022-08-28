@@ -11,10 +11,6 @@ const LandingView = ({ navigation }) => {
         <View>
         <Header />
         <LoginForm navigation={navigation} />
-        <Button
-        title="Go to Party"
-        onPress={() => navigation.navigate('Party')}
-         />
         </View>
     )
 }

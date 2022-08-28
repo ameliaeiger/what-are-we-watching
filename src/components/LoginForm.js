@@ -19,6 +19,10 @@ const LoginForm = ({navigation}) => {
                             style={styles.buttonText}>
                                 Login</Text>
                     </TouchableOpacity>
+                    <Button
+                        title="Go to Party"
+                        onPress={() => navigation.navigate('Party')}
+                    />
             </View>
         </View>
     )
