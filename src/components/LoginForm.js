@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { View, Text, TextInput, StyleSheet, Button, TouchableOpacity } from "react-native"
+import { View, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native"
 
 const LoginForm = ({navigation}) => {
     const [username, setUsername] = useState("username")
@@ -14,15 +14,12 @@ const LoginForm = ({navigation}) => {
                     onChangeText={setUsername}
                     />
                     <TouchableOpacity
+                        onPress={() => navigation.navigate('Party')}
                         style={styles.loginButton}>
                         <Text
                             style={styles.buttonText}>
                                 Login</Text>
                     </TouchableOpacity>
-                    <Button
-                        title="Go to Party"
-                        onPress={() => navigation.navigate('Party')}
-                    />
             </View>
         </View>
     )
