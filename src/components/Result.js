@@ -4,23 +4,26 @@ import { View, Text, Image, StyleSheet } from "react-native"
 const Result = () => {
     // const [result, setResult] = useState({})
     return(
-        <View
-            style={styles.resultContainer}>
-            <View>
-               <Text
-                    style={styles.titleText}>
-                Congratulations! Your party chose...
-               </Text>
-               <Image
-                    style={styles.imageResult}>
-                
-               </Image>
-               <Text
-                    style={styles.resultText}>
-                {/* SHREK 2!!! */}
-               </Text>
+        <>
+            {/* <Header /> */}
+            <View
+                style={styles.resultContainer}>
+                <View>
+                <Text
+                        style={styles.titleText}>
+                    Congratulations! Your party chose...
+                </Text>
+                <Image
+                        style={styles.imageResult}>
+                    
+                </Image>
+                <Text
+                        style={styles.resultText}>
+                    SHREK 2!!!
+                </Text>
+                </View>
             </View>
-        </View>
+        </>
     )
 }
 
@@ -36,7 +39,7 @@ const styles = StyleSheet.create({
     titleText: {
         fontFamily:"courier",
         fontSize:"20px",
-        color:"#F37180"
+        color:"#544E50"
     },
     imageResult: {
         width: 200, 
@@ -44,7 +47,7 @@ const styles = StyleSheet.create({
     },
     resultText: {
         fontFamily:"courier",
-        fontSize:"60px",
+        fontSize:"50px",
         color:"#F37180"
     }
 })

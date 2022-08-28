@@ -1,6 +1,7 @@
 import React from "react"
 
 import Header from "../components/Header.js"
+import Result from "../components/Result.js"
 
 
 const ResultsView = () => {
@@ -8,6 +9,7 @@ const ResultsView = () => {
     return(
         <>
         <Header />
+        <Result />
         </>
     )
 }
