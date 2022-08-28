@@ -1,6 +1,6 @@
 import React from "react"
 import { Text, View, StyleSheet, FlatList, Button } from "react-native"
-import Header from "../components/Header.js"
+// import Header from "../components/Header.js"
 import SettledEvent from "../components/SettledEvent.js"
 
 
