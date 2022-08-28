@@ -18,14 +18,14 @@ const styles = StyleSheet.create({
         display:"flex",
         alignItems:"center",
         justifyContent:"center",
-        height:"10vh",
+        height:"10%",
         width:"100%",
         position:"absolute",
-        top:"0",
+        top: 10
     },
     headerText: {
         fontFamily:"courier",
-        fontSize:"30px",
+        fontSize: 30,
         color:"#F37180"
     }
 })

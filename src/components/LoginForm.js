@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { View, Text, TextInput, StyleSheet, Button, TouchableOpacity } from "react-native"
 
-const LoginForm = () => {
+const LoginForm = ({navigation}) => {
     const [username, setUsername] = useState("username")
 
     return(
@@ -35,20 +35,18 @@ const styles = StyleSheet.create({
     },
     textInput: {
         border:"2px solid #544E50",
-        borderRadius:"20px",
+        borderRadius: 20,
         backgroundColor:"white",
         color:"#544E50"
     },
     loginButton: {
-        textAlign:"center",
         backgroundColor:"#F37180",
-        borderRadius:"20px",
-        marginTop:"10px"
+        borderRadius: 20 ,
+        marginTop:10
     },
     buttonText: {
-        
+        textAlign:"center",
     }
 })
-
 
 export default LoginForm
