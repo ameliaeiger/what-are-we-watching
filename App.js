@@ -1,21 +1,16 @@
-import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View } from 'react-native'
+import { View } from 'react-native'
 
 import LandingView from "./src/views/LandingView"
+import VotingView from './src/views/VotingView'
+
+import movieData from './moviedata'
+import { useEffect, useState } from 'react'
 
 export default function App() {
+
   return (
-    <View style={styles.container}>
+    <View>
       <LandingView />
     </View>
-  );
+  )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})

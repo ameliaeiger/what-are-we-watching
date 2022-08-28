@@ -1,30 +1,30 @@
 import React from "react"
 import { Text, View, StyleSheet } from "react-native"
 
-const Header = () => {
+const Loading= () => {
     return (
         <View
-            style={styles.headerContainer}>
+            style={styles.loadingContainer}>
             <Text
-                style={styles.headerText}>
-                waww ?
+                style={styles.loadingText}>
+                LOADING
             </Text>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    headerContainer: {
+    loadingContainer: {
         display:"flex",
         alignItems:"center",
         justifyContent:"center",
-        height:30,
+        height: 100,
         width:"100%",
     },
-    headerText: {
+    loadingText: {
         color:"#F37180"
     }
 })
 
 
-export default Header
+export default Loading
