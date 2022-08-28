@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         display:"flex",
         alignItems:"center",
         justifyContent:"center",
-        height:"10%",
+        height:30,
         width:"100%",
     },
     headerText: {
