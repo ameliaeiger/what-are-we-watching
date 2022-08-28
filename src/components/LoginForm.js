@@ -29,21 +29,26 @@ const styles = StyleSheet.create({
         display:"flex",
         alignItems:"center",
         justifyContent:"center",
+        height:"90%",
         width:"100%",
-        height:"80%",
-        backgroundColor:"#f4f1f1"
+        backgroundColor:"#f4f1f1",
     },
     textInput: {
-        border:"2px solid #544E50",
-        borderRadius:"20px",
+        height:50,
+        width:200,
+        borderRadius:20,
         backgroundColor:"white",
-        color:"#544E50"
+        color:"#858483",
+        textAlign:"center"
     },
     loginButton: {
-        textAlign:"center",
+        display:"flex",
+        alignItems:"center",
+        justifyContent:"center",
+        height:50,
         backgroundColor:"#F37180",
-        borderRadius:"20px",
-        marginTop:"10px"
+        borderRadius:20,
+        marginTop:10
     },
     buttonText: {
         
