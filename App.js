@@ -19,6 +19,7 @@ export default function App() {
       <Stack.Navigator initialRouteName='Landing'>
         <Stack.Screen name='Landing' component={LandingView} />
         <Stack.Screen name='Party' component={PartyView} />
+        <Stack.Screen name='Voting' component={VotingView} />
       </Stack.Navigator>
     </NavigationContainer>
   );

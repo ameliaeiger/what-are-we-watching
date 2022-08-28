@@ -18,7 +18,7 @@ const VotingView = ({data}) => {
         <Header />
         {loaded ? 
             <HeroImage
-                poster={data.poster_path}
+                // poster={data.poster_path}
              /> :
             <Loading />
         }

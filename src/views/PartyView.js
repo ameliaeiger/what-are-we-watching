@@ -1,7 +1,8 @@
 import React from "react"
-import { Text, View, StyleSheet, FlatList } from "react-native"
+import { Text, View, StyleSheet, FlatList, Button } from "react-native"
 import Header from "../components/Header.js"
 import SettledEvent from "../components/SettledEvent.js"
+
 
 const DATA = [
     {
@@ -18,16 +19,17 @@ const DATA = [
     },
   ];
 
-const PartyView = () => {
+const PartyView = ( { navigation }) => {
     return(
         <View style={styles.partyContainer}>        
             <Text>Settled Events</Text>
             <FlatList
                 data={DATA}
                 renderItem={({item}) => (
+                  <Button onPress={()=> navigation.navigate('Voting')}> 
                     <SettledEvent date={item.date} />
-                )
-                    
+                  </Button>
+                 )     
                 }
                 keyExtractor={item => item.id}
                 style={styles.eventList}
