@@ -26,7 +26,9 @@ const PartyView = ( { navigation }) => {
             <FlatList
                 data={DATA}
                 renderItem={({item}) => (
-                  <Button onPress={()=> navigation.navigate('Voting')}> 
+                  <Button
+                    title={item.date}
+                    onPress={()=>navigation.navigate("Voting")}> 
                     <SettledEvent date={item.date} />
                   </Button>
                  )     

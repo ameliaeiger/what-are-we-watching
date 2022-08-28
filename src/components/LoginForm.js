@@ -14,7 +14,8 @@ const LoginForm = ({navigation}) => {
                     onChangeText={setUsername}
                     />
                     <TouchableOpacity
-                        onPress={() => navigation.navigate('Party')}
+                        title="Login"
+                        onPress={()=> navigation.navigate('Party')}
                         style={styles.loginButton}>
                         <Text
                             style={styles.buttonText}>
