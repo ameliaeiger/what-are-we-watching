@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { View, Text, TextInput, StyleSheet, Button, TouchableOpacity } from "react-native"
 
-const LoginForm = () => {
+const LoginForm = ({navigation}) => {
     const [username, setUsername] = useState("username")
 
     return(
@@ -19,6 +19,10 @@ const LoginForm = () => {
                             style={styles.buttonText}>
                                 Login</Text>
                     </TouchableOpacity>
+                    <Button
+                        title="Go to Party"
+                        onPress={() => navigation.navigate('Party')}
+                    />
             </View>
         </View>
     )
@@ -51,9 +55,8 @@ const styles = StyleSheet.create({
         marginTop:10
     },
     buttonText: {
-        
+        textAlign:"center",
     }
 })
-
 
 export default LoginForm
