@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native"
 
 const LoginForm = ({navigation}) => {
-    const [username, setUsername] = useState("username")
+    const [username, setUsername] = useState("")
 
     return(
         <View
@@ -12,6 +12,7 @@ const LoginForm = ({navigation}) => {
                     style={styles.textInput}
                     value={username}
                     onChangeText={setUsername}
+                    placeholder="username"
                     />
                     <TouchableOpacity
                         title="Login"
