@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Text, View, StyleSheet, Image, Dimensions } from "react-native"
+import { View, StyleSheet, Image, Dimensions } from "react-native"
 
 const HeroImage = ({poster}) => {
     const windowWidth = Dimensions.get('window').width;
