@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react"
-import { Text, View, StyleSheet, Image } from "react-native"
+import { View, StyleSheet, Image, Dimensions, TouchableOpacity } from "react-native"
 
-const HeroImage = ({poster}) => {
+const HeroImage = ({poster, navigation}) => {
+    const windowWidth = Dimensions.get('window').width;
+    const windowHeight = Dimensions.get('window').height;
     const [image, setImage] = useState("")
 
     useEffect(() => {
@@ -15,9 +17,13 @@ const HeroImage = ({poster}) => {
     return (
         <View
             style={styles.heroImageContainer}>
+                <TouchableOpacity
+                    onPress={()=>navigation.navigate("Results")}>
                 <Image
-                    style={{height:100, width:100}}
-                    source={image} />
+                    style={{height:windowHeight, width:windowWidth}}
+                    source={image}
+                     />
+                </TouchableOpacity>
         </View>
     )
 }
@@ -25,6 +31,8 @@ const HeroImage = ({poster}) => {
 const styles = StyleSheet.create({
     heroImageContainer: {
         display:"flex",
+        alignItems:"center",
+        width:"100%"
     },
 })
 

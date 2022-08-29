@@ -5,22 +5,21 @@ const Result = () => {
     // const [result, setResult] = useState({})
     return(
         <>
-            {/* <Header /> */}
             <View
                 style={styles.resultContainer}>
                 <View>
-                <Text
-                        style={styles.titleText}>
-                    Congratulations! Your party chose...
-                </Text>
-                <Image
-                        style={styles.imageResult}>
-                    
-                </Image>
-                <Text
-                        style={styles.resultText}>
-                    SHREK 2!!!
-                </Text>
+                    <Text
+                            style={styles.titleText}>
+                        Congratulations! Your party chose...
+                    </Text>
+                    <Image
+                            style={styles.imageResult}>
+                        
+                    </Image>
+                    <Text
+                            style={styles.resultText}>
+                        SHREK 2!!!
+                    </Text>
                 </View>
             </View>
         </>
@@ -37,8 +36,7 @@ const styles = StyleSheet.create({
         backgroundColor:"#f4f1f1"
     },
     titleText: {
-        fontFamily:"courier",
-        fontSize:"20px",
+        fontSize:20,
         color:"#544E50"
     },
     imageResult: {
@@ -46,11 +44,9 @@ const styles = StyleSheet.create({
         height: 300
     },
     resultText: {
-        fontFamily:"courier",
-        fontSize:"50px",
+        fontSize:50,
         color:"#F37180"
     }
 })
-
 
 export default Result

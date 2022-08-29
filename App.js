@@ -5,9 +5,6 @@ import LandingView from "./src/views/LandingView"
 import ResultsView from "./src/views/ResultsView"
 import VotingView from './src/views/VotingView'
 
-import movieData from './moviedata'
-import { useEffect, useState } from 'react'
-
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -16,9 +13,13 @@ export default function App() {
 
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Landing'>
-        <Stack.Screen name='Landing' component={LandingView} />
+        <Stack.Screen 
+          name='Landing' 
+          component={LandingView}
+          options={{title:"login"}} />
         <Stack.Screen name='Party' component={PartyView} />
         <Stack.Screen name='Voting' component={VotingView} />
+        <Stack.Screen name='Results' component={ResultsView} />
       </Stack.Navigator>
     </NavigationContainer>
   )

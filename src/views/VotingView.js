@@ -1,24 +1,28 @@
+//IMPORTS
 import React, { useEffect, useState } from "react"
 
-import Header from "../components/Header.js"
+//COMPONENTS
 import HeroImage from "../components/HeroImage.js"
 import Loading from "../components/Loading.js"
 
-const VotingView = ({data}) => {
+//DATA
+import movieData from "../../moviedata.js"
+
+const VotingView = ( {navigation} ) => {
     const [allData, setAllData] = useState("")
     const [loaded, setLoaded] = useState(false)
 
     useEffect(() => {
-        setAllData(data)
+        setAllData(movieData)
         setLoaded(true)
-    },[data])
+    },[])
 
     return(
         <>
-        <Header />
         {loaded ? 
             <HeroImage
-                // poster={data.poster_path}
+                poster={allData.poster_path}
+                navigation={navigation}
              /> :
             <Loading />
         }
