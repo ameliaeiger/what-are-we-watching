@@ -6,15 +6,15 @@ const LoginForm = ({navigation}) => {
 
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-        <View
-            style={styles.loginFormContainer}>
-            <View>
-                <TextInput
-                    style={styles.textInput}
-                    value={username}
-                    onChangeText={setUsername}
-                    placeholder="username"
-                    />
+            <View
+                style={styles.loginFormContainer}>
+                <View>
+                    <TextInput
+                        style={styles.textInput}
+                        value={username}
+                        onChangeText={setUsername}
+                        placeholder="username"
+                        />
                     <TouchableOpacity
                         title="Login"
                         onPress={()=> navigation.navigate('Party')}
@@ -23,8 +23,8 @@ const LoginForm = ({navigation}) => {
                             style={styles.buttonText}>
                                 Login</Text>
                     </TouchableOpacity>
+                </View>
             </View>
-        </View>
         </TouchableWithoutFeedback>
     )
 }
