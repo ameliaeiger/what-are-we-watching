@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
-import { View, StyleSheet, Image, Dimensions } from "react-native"
+import { View, StyleSheet, Image, Dimensions, TouchableOpacity } from "react-native"
 
-const HeroImage = ({poster}) => {
+const HeroImage = ({poster, navigation}) => {
     const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;
     const [image, setImage] = useState("")
@@ -17,9 +17,13 @@ const HeroImage = ({poster}) => {
     return (
         <View
             style={styles.heroImageContainer}>
+                <TouchableOpacity
+                    onPress={()=>navigation.navigate("Results")}>
                 <Image
                     style={{height:windowHeight, width:windowWidth}}
-                    source={image} />
+                    source={image}
+                     />
+                </TouchableOpacity>
         </View>
     )
 }

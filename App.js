@@ -16,9 +16,13 @@ export default function App() {
 
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Landing'>
-        <Stack.Screen name='Landing' component={LandingView} />
+        <Stack.Screen 
+          name='Landing' 
+          component={LandingView}
+          options={{title:"login"}} />
         <Stack.Screen name='Party' component={PartyView} />
         <Stack.Screen name='Voting' component={VotingView} />
+        <Stack.Screen name='Results' component={ResultsView} />
       </Stack.Navigator>
     </NavigationContainer>
   )

@@ -9,7 +9,7 @@ import Loading from "../components/Loading.js"
 //DATA
 import movieData from "../../moviedata.js"
 
-const VotingView = () => {
+const VotingView = ( {navigation} ) => {
     const [allData, setAllData] = useState("")
     const [loaded, setLoaded] = useState(false)
 
@@ -23,6 +23,7 @@ const VotingView = () => {
         {loaded ? 
             <HeroImage
                 poster={allData.poster_path}
+                navigation={navigation}
              /> :
             <Loading />
         }
