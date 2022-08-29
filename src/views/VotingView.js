@@ -18,14 +18,6 @@ const VotingView = () => {
         setLoaded(true)
     },[])
 
-    const heroImageView = () => {
-        <View 
-        // style={styles.heroImageViewContainer}
-        >
-            <HeroImage poster={allData.poster_path}/>
-        </View>
-    }
-
     return(
         <>
         {loaded ? 
