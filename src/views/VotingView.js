@@ -1,6 +1,5 @@
 //IMPORTS
 import React, { useEffect, useState } from "react"
-import { StyleSheet } from "react-native-web"
 
 //COMPONENTS
 import HeroImage from "../components/HeroImage.js"
@@ -30,12 +29,5 @@ const VotingView = ( {navigation} ) => {
         </>
     )
 }
-
-const styles = StyleSheet.create({
-    heroImageViewContainer: {
-        display:"flex",
-        justifyContent:"center"
-    },
-})
 
 export default VotingView
