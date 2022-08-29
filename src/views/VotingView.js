@@ -1,29 +1,48 @@
+//IMPORTS
 import React, { useEffect, useState } from "react"
+import { StyleSheet } from "react-native-web"
 
-import Header from "../components/Header.js"
+//COMPONENTS
 import HeroImage from "../components/HeroImage.js"
 import Loading from "../components/Loading.js"
 
-const VotingView = ({data}) => {
+//DATA
+import movieData from "../../moviedata.js"
+
+const VotingView = () => {
     const [allData, setAllData] = useState("")
     const [loaded, setLoaded] = useState(false)
 
     useEffect(() => {
-        setAllData(data)
+        setAllData(movieData)
         setLoaded(true)
-    },[data])
+    },[])
+
+    const heroImageView = () => {
+        <View 
+        // style={styles.heroImageViewContainer}
+        >
+            <HeroImage poster={allData.poster_path}/>
+        </View>
+    }
 
     return(
         <>
-        <Header />
         {loaded ? 
             <HeroImage
-                // poster={data.poster_path}
+                poster={allData.poster_path}
              /> :
             <Loading />
         }
         </>
     )
 }
+
+const styles = StyleSheet.create({
+    heroImageViewContainer: {
+        display:"flex",
+        justifyContent:"center"
+    },
+})
 
 export default VotingView

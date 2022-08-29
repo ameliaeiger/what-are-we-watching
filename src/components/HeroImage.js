@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react"
-import { Text, View, StyleSheet, Image } from "react-native"
+import { Text, View, StyleSheet, Image, Dimensions } from "react-native"
 
 const HeroImage = ({poster}) => {
+    const windowWidth = Dimensions.get('window').width;
+    const windowHeight = Dimensions.get('window').height;
     const [image, setImage] = useState("")
 
     useEffect(() => {
@@ -16,7 +18,7 @@ const HeroImage = ({poster}) => {
         <View
             style={styles.heroImageContainer}>
                 <Image
-                    style={{height:100, width:100}}
+                    style={{height:windowHeight, width:windowWidth}}
                     source={image} />
         </View>
     )
@@ -25,6 +27,8 @@ const HeroImage = ({poster}) => {
 const styles = StyleSheet.create({
     heroImageContainer: {
         display:"flex",
+        alignItems:"center",
+        width:"100%"
     },
 })
 
