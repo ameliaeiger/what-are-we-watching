@@ -37,16 +37,16 @@ const styles = StyleSheet.create({
         backgroundColor:"#f4f1f1"
     },
     titleText: {
-        // fontSize:"20px",
-        // color:"#544E50"
+        fontSize:20,
+        color:"#544E50"
     },
     imageResult: {
-        // width: 200, 
-        // height: 300
+        width: 200, 
+        height: 300
     },
     resultText: {
-        // fontSize:"50px",
-        // color:"#F37180"
+        fontSize:50,
+        color:"#F37180"
     }
 })
 
