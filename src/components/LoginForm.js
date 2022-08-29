@@ -1,10 +1,11 @@
 import React, { useState } from "react"
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native"
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from "react-native"
 
 const LoginForm = ({navigation}) => {
     const [username, setUsername] = useState("")
 
     return(
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <View
             style={styles.loginFormContainer}>
             <View>
@@ -24,6 +25,7 @@ const LoginForm = ({navigation}) => {
                     </TouchableOpacity>
             </View>
         </View>
+        </TouchableWithoutFeedback>
     )
 }
 
