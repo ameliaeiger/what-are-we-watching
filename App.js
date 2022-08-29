@@ -5,9 +5,6 @@ import LandingView from "./src/views/LandingView"
 import ResultsView from "./src/views/ResultsView"
 import VotingView from './src/views/VotingView'
 
-import movieData from './moviedata'
-import { useEffect, useState } from 'react'
-
 const Stack = createNativeStackNavigator();
 
 export default function App() {
