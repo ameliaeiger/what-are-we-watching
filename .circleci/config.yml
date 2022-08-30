@@ -28,15 +28,21 @@
 version: 2.1
 
 jobs:
-  build-test:
-      docker:
-      - image: cimg/base:stable
-      steps:
-      - checkout
-      - run: npm install
-      - run: npm test
-workflows:
   build:
+      docker:
+        - image: cimg/base:stable
+      steps:
+        - checkout
+        - run: npm install
+  test:
+    docker:
+      -image: cimg/base:stable
+    steps:
+      - checkout
+      - run: npm run test
+workflows:
+  version: 2
+  build_and_test:
     jobs:
-      - build-test:
-          start: npm start
+      - build
+      - test
