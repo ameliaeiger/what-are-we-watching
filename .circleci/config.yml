@@ -25,24 +25,33 @@
 #     jobs:
 #       - say-hello
 
-version: 2.1
+# version: 2.1
 
-jobs:
-  build:
-      docker:
-        - image: cimg/base:stable
-      steps:
-        - checkout
-        - run: npm install
-  test:
-      docker:
-        - image: cimg/base:stable
-      steps:
-        - checkout
-        - run: npm run test
+# jobs:
+#   build:
+#       docker:
+#         - image: cimg/base:stable
+#       steps:
+#         - checkout
+#         - run: expo install
+#   test:
+#       docker:
+#         - image: cimg/base:stable
+#       steps:
+#         - checkout
+#         - run: npm run test
+# workflows:
+#   version: 2
+#   build_and_test:
+#     jobs:
+#       - build
+#       - test
+
+version: '2.1'
+orbs:
+  node: circleci/v16.13.2
 workflows:
-  version: 2
-  build_and_test:
+  test:
     jobs:
-      - build
-      - test
+      - node/test:
+          test-results-for: jest
