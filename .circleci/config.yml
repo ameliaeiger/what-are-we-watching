@@ -49,7 +49,7 @@
 
 version: '2.1'
 orbs:
-  node: circleci/v16.13.2
+  node: circleci/16.13.2
 workflows:
   test:
     jobs:
