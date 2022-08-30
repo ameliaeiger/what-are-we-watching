@@ -7,14 +7,22 @@ import { useMutation, gql } from "@apollo/client"
         CreateUser(userName: $userName) {
             userName
             userId
-          }
-      }
+        }
+    }
 `;
 
 const LoginForm = ({navigation}) => {
     const [userNameValue, setUserNameValue] = useState("User1")
 
-    const [userLogin, { data, loading, error }] = useMutation(USER_LOGIN_CHECK, { variables: {userName: userNameValue} })
+    const [userLogin, { data, loading, error }] = useMutation(USER_LOGIN_CHECK, { 
+        variables: {userName: userNameValue}, 
+        onCompleted: () => runLogin() 
+    })
+
+    const runLogin = () => {
+
+        navigation.navigate("Party", {userId: data.CreateUser.userId})
+    }
 
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -30,7 +38,7 @@ const LoginForm = ({navigation}) => {
                         />
                     <TouchableOpacity
                         title="Login"
-                        onPress={userLogin}
+                        onPress={()=>navigation.navigate("Party")}
                         style={styles.loginButton}>
                         <Text
                             style={styles.buttonText}>

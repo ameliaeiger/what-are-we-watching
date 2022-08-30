@@ -5,7 +5,7 @@ import SettledEvent from "../components/SettledEvent.js"
 import { useQuery, gql } from "@apollo/client"
 
 const GET_ALL_EVENTS = gql`
-      {
+  {  getEvents {
         events {
         hostId
         guestId
@@ -13,6 +13,7 @@ const GET_ALL_EVENTS = gql`
         status
         }
     }
+  }
 `;
 
 const DATA = [
@@ -31,7 +32,6 @@ const DATA = [
   ];
   
   const PartyView = ( { navigation }) => {
-
     const {data, loading, error} = useQuery(GET_ALL_EVENTS)
 
     return(
@@ -40,19 +40,19 @@ const DATA = [
             <Text>Settled Events</Text>
             {loading && <Text>Your data is loading...</Text>}
             {error && <Text>Something has gone wrong</Text>}
-            <FlatList
-                data={DATA}
+            {data && <FlatList
+                data={data.events}
                 renderItem={({item}) => (
                   <Button
-                  title={item.date}
+                  title={item.name}
                   onPress={()=>navigation.navigate("Voting")}> 
-                    <SettledEvent date={item.date} />
+                    <SettledEvent date={item.name} />
                   </Button>
                  )     
                 }
                 keyExtractor={item => item.id}
                 style={styles.eventList}
-                />
+                />}
         </View>
     )
 }
