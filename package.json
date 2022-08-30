@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "jest-junit": "^14.0.1",
     "react-test-renderer": "^18.0.0"
   },
   "jest": {
