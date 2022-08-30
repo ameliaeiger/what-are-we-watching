@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator();
 
 const client = new ApolloClient ({
 	cache: new InMemoryCache(),
-	uri: 'https://7faa1aa4-3de7-4b85-8d00-12221883cecb.mock.pstmn.io',
+	uri: 'https://7faa1aa4-3de7-4b85-8d00-12221883cecb.mock.pstmn.io/events',
 });
 
 export default function App() {
