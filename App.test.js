@@ -1,13 +1,12 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-
 import App from './App';
 
 function sum(a, b) {
   return a + b;
 }
 
-describe('<App />', () => {
+// describe('JEST SUM TEST', () => {
 //UNIT TEST
   // it('has 1 child', () => {
   //   const tree = renderer.create(<App />).toJSON();
@@ -19,17 +18,15 @@ describe('<App />', () => {
   //   expect(tree).toMatchSnapshot();
   // });
 
-  test('adds 1 + 2 to equal 3', () => {
-    expect(sum(1, 2)).toBe(3);
-  });
+//   test('adds 1 + 2 to equal 3', () => {
+//     expect(sum(1, 2)).toBe(3);
+//   });
 
-});
+// });
 
 
-describe('<App />', () => {
+describe("JEST SUM TEST", () => {
     test('adds 1 + 2 to equal 3', () => {
       expect(sum(1, 2)).toBe(3);
     });
-  
   });
-
