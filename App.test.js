@@ -1,6 +1,5 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import App from './App';
 
 function sum(a, b) {
   return a + b;

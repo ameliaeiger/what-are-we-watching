@@ -38,7 +38,7 @@ const LoginForm = ({navigation}) => {
                         />
                     <TouchableOpacity
                         title="Login"
-                        onPress={()=>navigation.navigate("Party")}
+                        onPress={()=>navigation.navigate("CreateEventView")}
                         style={styles.loginButton}>
                         <Text
                             style={styles.buttonText}>
