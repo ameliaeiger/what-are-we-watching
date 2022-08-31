@@ -6,13 +6,14 @@ const HeroImage = ({poster, navigation}) => {
     const windowHeight = Dimensions.get('window').height;
     const [image, setImage] = useState("")
 
+
     useEffect(() => {
         setImage(
             {
                 uri: `https://image.tmdb.org/t/p/original/${poster}`
             }
         )
-    },[poster])
+    },[])
 
     return (
         <View
