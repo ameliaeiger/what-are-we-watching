@@ -1,6 +1,6 @@
 //IMPORTS
-import React from "react"
-import { Text, View, StyleSheet, Dimensions } from "react-native"
+import React, { useEffect, useState } from "react"
+import { Text, View, StyleSheet, Dimensions, Modal, Pressable, Alert } from "react-native"
 
 //COMPONENTS
 import CreateEvent from "../components/CreateEvent.js"
@@ -37,6 +37,56 @@ const DATA = [
   ]
   
   const CreateEventView = ( { navigation }) => {
+    const [modalVisible, setModalVisible] = useState(false)
+
+    const modal = () => {
+      return (
+        <View style={styles.centeredView}>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+              Alert.alert("Modal has been closed.");
+              setModalVisible(!modalVisible);
+            }}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.modalText}>Hello World!</Text>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={() => setModalVisible(!modalVisible)}
+                >
+                  <Text style={styles.textStyle}>Hide Modal</Text>
+                </Pressable>
+              </View>
+            </View>
+          </Modal>
+          <Pressable
+            style={[styles.button, styles.buttonOpen]}
+            onPress={() => setModalVisible(true)}
+          >
+            <Text style={styles.textStyle}>Show Modal</Text>
+          </Pressable>
+        </View>
+      )}
+    
+    const toggleModal = (e, title) => {
+      //HANDLE EVENT
+      e.preventDefault()
+      console.log(title)
+  
+      //NAVIGATE
+      // navigation.navigate("PartyView", {
+      //   eventTitle:title
+      // })
+
+      //SET MODAL VISIBLE STATE "TRUE"
+      setModalVisible(true)
+    }
+
+    //END
 
     const windowWidth = Dimensions.get('window').width
     const windowHeight = Dimensions.get('window').height
@@ -50,6 +100,7 @@ const DATA = [
         return(
           <EventsList
             data={data}
+            toggleModal={toggleModal}
             navigation={navigation} />
           )
       } else {
@@ -57,13 +108,62 @@ const DATA = [
       }
     }
 
+    useEffect(() => {
+      console.log(modalVisible)
+    },[modalVisible])
+
     return(
         <View style={{height:windowHeight, width:windowWidth}}>        
           {/* {console.log(data)} */}
             <CreateEvent navigation={navigation}/>
             {getDisplay()}
+            {modalVisible && modal()}
         </View>
     )
 }
 
 export default CreateEventView
+
+const styles = StyleSheet.create({
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center"
+  }
+})
