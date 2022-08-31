@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, TouchableOpacity, Text, Modal, Pressable } from 'react-native';
+import React from 'react';
+import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 
 
 const EventListItem = ({ title, navigation, toggleModal, guest }) => {
