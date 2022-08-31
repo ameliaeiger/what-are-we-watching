@@ -26,22 +26,23 @@ const CreateEvent = ({navigation, userId}) => {
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
             <View
-                style={styles.loginFormContainer}>
+                style={styles.createEventFormContainer}>
                     {/* {console.log(data)} */}
-                <View>
+                <View
+                    style={styles.inputButtonContainer}>
                     <TextInput
-                        style={styles.textInput}
+                        style={styles.createEventTextInput}
                         value={eventName}
                         onChangeText={setEventName}
-                        placeholder="username"
+                        placeholder="add event"
                         />
                     <TouchableOpacity
-                        title="Login"
-                        onPress={()=>navigation.navigate("Voting")}
-                        style={styles.eventButton}>
+                        title="Create Event"
+                        onPress={()=>navigation.navigate("CreateEventView")}
+                        style={styles.createEventButton}>
                         <Text
-                            style={styles.buttonText}>
-                                Create Event</Text>
+                            style={styles.createEventButtonText}>
+                                +</Text>
                     </TouchableOpacity>
                     {/* {loading && <Text>Creating event...</Text>}
                     {error && <Text>There was a problem creating your event</Text>}
@@ -53,33 +54,43 @@ const CreateEvent = ({navigation, userId}) => {
 }
 
 const styles = StyleSheet.create({
-    loginFormContainer: {
-        display:"flex",
-        alignItems:"center",
+    createEventFormContainer: {
         justifyContent:"center",
-        height:"90%",
+        alignItems:"center",
+        height:"30%",
         width:"100%",
         backgroundColor:"#f4f1f1",
     },
-    textInput: {
-        height:50,
-        width:200,
+    inputButtonContainer: {
+        display:"flex",
+        flexDirection:"row",
+        alignItems:"center",
+        justifyContent:"center",
+        height:"25%"
+    },
+    createEventTextInput: {
+        height:"100%",
+        width:250,
         borderRadius:20,
         backgroundColor:"white",
         color:"#858483",
-        textAlign:"center"
+        textAlign:"center",
+        margin:20,
     },
-    eventButton: {
+    createEventButton: {
         display:"flex",
         alignItems:"center",
         justifyContent:"center",
-        height:50,
+        height:"75%",
+        width:50,
         backgroundColor:"#F37180",
         borderRadius:20,
-        marginTop:10
     },
-    buttonText: {
+    createEventButtonText: {
+        fontSize:25,
         textAlign:"center",
+        fontWeight:"bold",
+        color:"white",
     }
 })
 

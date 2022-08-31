@@ -1,9 +1,14 @@
+//IMPORTS
 import React from "react"
-import { Text, View, StyleSheet, FlatList, Button } from "react-native"
-// import Header from "../components/Header.js"
-import EventListItem from "../components/EventListItem.js"
+import { Text, View, StyleSheet, Dimensions } from "react-native"
+
+//COMPONENTS
 import CreateEvent from "../components/CreateEvent.js"
+import EventsList from "../components/EventsList.js"
+
+//APOLLO
 import { useQuery, gql } from "@apollo/client"
+
 
 const GET_ALL_EVENTS = gql`
   {
@@ -14,7 +19,7 @@ const GET_ALL_EVENTS = gql`
         status
         }
   }
-`;
+`
 
 const DATA = [
     {
@@ -29,44 +34,36 @@ const DATA = [
       id: '58694a0f-3da1-471f-bd96-145571e29d72',
       date: 'September 22nd',
     },
-  ];
+  ]
   
   const CreateEventView = ( { navigation }) => {
+
+    const windowWidth = Dimensions.get('window').width
+    const windowHeight = Dimensions.get('window').height
+
     const {data, loading, error} = useQuery(GET_ALL_EVENTS)
 
+    const getDisplay = () => {
+      if (loading){
+        return <Text>loading...</Text>
+      } else if  (!loading && !error && data) {
+        return(
+          <EventsList
+            data={data}
+            navigation={navigation} />
+          )
+      } else {
+        return <Text>Oops! There was an error loading the page. Please try again.</Text>
+      }
+    }
+
     return(
-        <View style={styles.partyContainer}>        
-          {console.log(data)}
+        <View style={{height:windowHeight, width:windowWidth}}>        
+          {/* {console.log(data)} */}
             <CreateEvent navigation={navigation}/>
-            <Text>Events</Text>
-            {loading && <Text>Your data is loading...</Text>}
-            {error && <Text>Something has gone wrong</Text>}
-            {data && <FlatList
-                data={data.events}
-                renderItem={({item}) => (
-                    <EventListItem title={item.name} navigation={navigation} guest={item.guestId}/>
-                 )     
-                }
-                keyExtractor={item => item.name}
-                style={styles.eventList}
-                />}
+            {getDisplay()}
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    partyContainer: {
-        display:"flex",
-        alignItems:"center",
-        justifyContent:"center",
-        width:"100%",
-        height:"80%",
-        backgroundColor:"#f4f1f1"
-    },
-    eventList: {
-        width:"100%",
-    }
-})
-
 
 export default CreateEventView
