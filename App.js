@@ -31,7 +31,7 @@ export default function App() {
             options={{title:"login"}} />
           <Stack.Screen name='CreateEventView' component={CreateEventView} />
           <Stack.Screen name='PartyView' component={PartyView} />
-          <Stack.Screen name='Voting' component={VotingView} />
+          <Stack.Screen name='VotingView' component={VotingView} />
           <Stack.Screen name='Results' component={ResultsView} />
         </Stack.Navigator>
       </NavigationContainer>
