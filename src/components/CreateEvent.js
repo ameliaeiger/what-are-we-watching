@@ -11,23 +11,23 @@ import { useMutation, gql } from "@apollo/client"
       }
 `;
 
-const LoginForm = ({navigation, userId}) => {
+const CreateEvent = ({navigation, userId}) => {
     const [eventName, setEventName] = useState("Drew's Movie Fest")
 
-    const [createEvent, { data, loading, error }] = useMutation(CREATE_USER_EVENT, { 
-        variables: {eventName: eventName, userId: 12345}, 
-        onCompleted: () => goToEvent() 
-    })
+    // const [createEvent, { data, loading, error }] = useMutation(CREATE_USER_EVENT, { 
+    //     variables: {eventName: eventName, userId: 12345}, 
+    //     onCompleted: () => goToEvent() 
+    // })
 
-    const goToEvent = () => {
-        navigation.navigate("Voting", {eventId: data.JoinEvent.eventId})
-    }
+    // const goToEvent = () => {
+    //     navigation.navigate("Voting", {eventId: data.JoinEvent.eventId})
+    // }
 
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
             <View
                 style={styles.loginFormContainer}>
-                    {console.log(data)}
+                    {/* {console.log(data)} */}
                 <View>
                     <TextInput
                         style={styles.textInput}
@@ -37,15 +37,15 @@ const LoginForm = ({navigation, userId}) => {
                         />
                     <TouchableOpacity
                         title="Login"
-                        onPress={()=>navigation.navigate("Party")}
+                        onPress={()=>navigation.navigate("Voting")}
                         style={styles.eventButton}>
                         <Text
                             style={styles.buttonText}>
                                 Create Event</Text>
                     </TouchableOpacity>
-                    {loading && <Text>Creating event...</Text>}
+                    {/* {loading && <Text>Creating event...</Text>}
                     {error && <Text>There was a problem creating your event</Text>}
-                    {data && <Text>{data.JoinEvent.eventId}</Text>}
+                    {data && <Text>{data.JoinEvent.eventId}</Text>} */}
                 </View>
             </View>
         </TouchableWithoutFeedback>
@@ -83,4 +83,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default LoginForm
+export default CreateEvent

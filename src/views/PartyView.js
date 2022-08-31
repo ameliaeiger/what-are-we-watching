@@ -37,7 +37,7 @@ const DATA = [
     return(
         <View style={styles.partyContainer}>        
           {console.log(data)}
-            <CreateEvent />
+            <CreateEvent navigation={navigation}/>
             <Text>Events</Text>
             {loading && <Text>Your data is loading...</Text>}
             {error && <Text>Something has gone wrong</Text>}
