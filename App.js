@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator} from '@react-navigation/native-stack'
-import PartyView from "./src/views/PartyView"
+import PartyView from "./src/views/CreateEventView"
 import LandingView from "./src/views/LandingView"
 import ResultsView from "./src/views/ResultsView"
 import VotingView from './src/views/VotingView'
