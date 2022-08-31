@@ -9,7 +9,7 @@ import { useMutation, gql } from "@apollo/client"
             eventName
           }
       }
-`;
+`
 
 const CreateEvent = ({navigation, userId}) => {
     const [eventName, setEventName] = useState("Drew's Movie Fest")
@@ -21,7 +21,7 @@ const CreateEvent = ({navigation, userId}) => {
     const goToEvent = () => {
         navigation.navigate("Voting", {eventId: data.JoinEvent.eventId})
     }
-    
+
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
             <View

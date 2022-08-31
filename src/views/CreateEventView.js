@@ -1,6 +1,9 @@
 //IMPORTS
 import React, { useEffect, useState } from "react"
-import { Text, View, StyleSheet, Dimensions, Modal, Pressable, Alert } from "react-native"
+import { Text, View, StyleSheet, Dimensions, Modal, Pressable, Alert, TouchableOpacity, Button } from "react-native"
+
+//ADDITIONAL LIBRARIES
+import { BlurView } from 'expo-blur';
 
 //COMPONENTS
 import CreateEvent from "../components/CreateEvent.js"
@@ -36,8 +39,12 @@ const DATA = [
     },
   ]
   
-  const CreateEventView = ( { navigation }) => {
+  const CreateEventView = ({ navigation }) => {
     const [modalVisible, setModalVisible] = useState(false)
+    const [eventName, setEventName] = useState("")
+    const {data, loading, error} = useQuery(GET_ALL_EVENTS)
+    const windowWidth = Dimensions.get('window').width
+    const windowHeight = Dimensions.get('window').height
 
     const modal = () => {
       return (
@@ -53,29 +60,36 @@ const DATA = [
           >
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Text style={styles.modalText}>Hello World!</Text>
-                <Pressable
+                <Text style={styles.modalText}>Welcome to {eventName}!</Text>
+                <Text style={styles.modalText}>Ready to get started?</Text>
+                <TouchableOpacity
+                  style={[styles.button, styles.buttonConfirm]}
+                  onPress={() => setModalVisible(!modalVisible)}
+                >
+                  <Text style={styles.textStyle}>Let's Go!</Text>
+                </TouchableOpacity>                
+                <TouchableOpacity
                   style={[styles.button, styles.buttonClose]}
                   onPress={() => setModalVisible(!modalVisible)}
                 >
-                  <Text style={styles.textStyle}>Hide Modal</Text>
-                </Pressable>
+                  <Text style={styles.textStyle}>Back</Text>
+                </TouchableOpacity>
               </View>
             </View>
           </Modal>
-          <Pressable
+          {/* <Pressable
             style={[styles.button, styles.buttonOpen]}
             onPress={() => setModalVisible(true)}
           >
             <Text style={styles.textStyle}>Show Modal</Text>
-          </Pressable>
+          </Pressable> */}
         </View>
       )}
     
     const toggleModal = (e, title) => {
       //HANDLE EVENT
       e.preventDefault()
-      console.log(title)
+      setEventName(title)
   
       //NAVIGATE
       // navigation.navigate("PartyView", {
@@ -87,11 +101,6 @@ const DATA = [
     }
 
     //END
-
-    const windowWidth = Dimensions.get('window').width
-    const windowHeight = Dimensions.get('window').height
-
-    const {data, loading, error} = useQuery(GET_ALL_EVENTS)
 
     const getDisplay = () => {
       if (loading){
@@ -112,13 +121,23 @@ const DATA = [
       console.log(modalVisible)
     },[modalVisible])
 
+    const getString = () => {
+      if (modalVisible){
+        return "blurContainer"
+      } else {
+        return "blurContainerHidden"
+      }
+    }
+
     return(
+      <BlurView intensity={100} class={getString}>
         <View style={{height:windowHeight, width:windowWidth}}>        
           {/* {console.log(data)} */}
             <CreateEvent navigation={navigation}/>
             {getDisplay()}
             {modalVisible && modal()}
         </View>
+      </BlurView>
     )
 }
 
@@ -130,6 +149,22 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22
+  },
+  blurContainerHidden: {
+    display:"none",
+    borderWidth:5,
+    height:200,
+    width:"100%",
+    position:"absolute",
+    top:0
+  },
+  blurContainer: {
+    display:"flex",
+    borderWidth:5,
+    height:200,
+    width:"100%",
+    position:"absolute",
+    top:0,
   },
   modalView: {
     margin: 20,
@@ -147,23 +182,31 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2
-  },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center",
+    height:60,
+    borderRadius: 25,
+    borderWidth:3,
+    elevation: 5
   },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    width:175,
+    opacity:.7,
+    backgroundColor: "#544E50",
+  },
+  buttonConfirm: {
+    width:175,
+    marginBottom:10,
+    backgroundColor:"#F37180",
   },
   textStyle: {
-    color: "white",
+    color: "black",
     fontWeight: "bold",
     textAlign: "center"
   },
   modalText: {
     marginBottom: 15,
     textAlign: "center"
-  }
+  },
 })
