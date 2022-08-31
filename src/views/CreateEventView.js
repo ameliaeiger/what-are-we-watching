@@ -41,6 +41,7 @@ const DATA = [
   
   const CreateEventView = ({ navigation }) => {
     const [modalVisible, setModalVisible] = useState(false)
+    const [blurOn, setBlurOn] = useState(false)
     const [eventName, setEventName] = useState("")
     const {data, loading, error} = useQuery(GET_ALL_EVENTS)
     const windowWidth = Dimensions.get('window').width
@@ -51,8 +52,9 @@ const DATA = [
         <View style={styles.centeredView}>
           <Modal
             animationType="slide"
-            transparent={true}
+            transparent={false}
             visible={modalVisible}
+            style={{backgroundColor: 'rgba(52, 52, 52, 0.3)', opacity:.5}}
             onRequestClose={() => {
               Alert.alert("Modal has been closed.");
               setModalVisible(!modalVisible);
@@ -118,20 +120,23 @@ const DATA = [
     }
 
     useEffect(() => {
-      console.log(modalVisible)
+      console.log("modal visible use effect: ", modalVisible)
+      toggleBlur()
     },[modalVisible])
 
-    const getString = () => {
+    const toggleBlur = () => {
       if (modalVisible){
-        return "blurContainer"
+        console.log("visible")
+        setBlurOn("blurContainer")
       } else {
-        return "blurContainerHidden"
+        console.log("hidden")
+        setBlurOn("blurContainerHidden")
       }
     }
 
     return(
-      <BlurView intensity={100} class={getString}>
-        <View style={{height:windowHeight, width:windowWidth}}>        
+      <BlurView intensity={100} tint="dark" style={`styles.${blurOn}`}>
+        <View style={{height:windowHeight, width:windowWidth}}>   
           {/* {console.log(data)} */}
             <CreateEvent navigation={navigation}/>
             {getDisplay()}
@@ -153,15 +158,15 @@ const styles = StyleSheet.create({
   blurContainerHidden: {
     display:"none",
     borderWidth:5,
-    height:200,
+    height:"100%",
     width:"100%",
     position:"absolute",
-    top:0
+    top:0,
   },
   blurContainer: {
     display:"flex",
     borderWidth:5,
-    height:200,
+    height:"100%",
     width:"100%",
     position:"absolute",
     top:0,
