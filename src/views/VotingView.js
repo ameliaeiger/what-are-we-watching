@@ -1,6 +1,9 @@
 //IMPORTS
 import React, { useEffect, useState } from "react"
-import { TouchableOpacity, Text, StyleSheet } from "react-native"
+import { View, TouchableOpacity, Text, StyleSheet } from "react-native"
+
+//LIBRARIES
+import Swiper from 'react-native-swiper'
 
 //COMPONENTS
 import HeroImage from "../components/HeroImage.js"
@@ -47,10 +50,21 @@ const VotingView = ({ navigation }) => {
         <>
         {loaded ? 
             <>
-            <HeroImage
+            <Swiper style={styles.wrapper} showsButtons={true}>
+                <View style={styles.slide1}>
+                    <Text style={styles.text}>Hello Swiper</Text>
+                </View>
+                <View style={styles.slide2}>
+                    <Text style={styles.text}>Beautiful</Text>
+                </View>
+                <View style={styles.slide3}>
+                    <Text style={styles.text}>And simple</Text>
+                </View>
+            </Swiper>
+            {/* <HeroImage
                 poster={movieData.poster_path}
                 navigation={navigation}
-             />
+             /> */}
             <TouchableOpacity
                 style={styles.buttonNo}>
                 <Text>No</Text>
@@ -96,4 +110,28 @@ const styles = StyleSheet.create({
         right:"15%",
         borderRadius:100,
     },
+    wrapper: {},
+  slide1: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#9DD6EB'
+  },
+  slide2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#97CAE5'
+  },
+  slide3: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#92BBD9'
+  },
+  text: {
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: 'bold'
+  }
 })
