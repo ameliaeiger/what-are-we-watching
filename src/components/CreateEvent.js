@@ -12,10 +12,10 @@ import { useMutation, gql } from "@apollo/client"
 `;
 
 const LoginForm = ({navigation, userId}) => {
-    const [eventNameValue, setEventNameValue] = useState("Drew's Movie Fest")
+    const [eventName, setEventName] = useState("Drew's Movie Fest")
 
     const [createEvent, { data, loading, error }] = useMutation(CREATE_USER_EVENT, { 
-        variables: {eventName: eventNameValue, userId: 12345}, 
+        variables: {eventName: eventName, userId: 12345}, 
         onCompleted: () => goToEvent() 
     })
 
@@ -31,14 +31,14 @@ const LoginForm = ({navigation, userId}) => {
                 <View>
                     <TextInput
                         style={styles.textInput}
-                        value={eventNameValue}
-                        onChangeText={setEventNameValue}
+                        value={eventName}
+                        onChangeText={setEventName}
                         placeholder="username"
                         />
                     <TouchableOpacity
                         title="Login"
                         onPress={()=>navigation.navigate("Party")}
-                        style={styles.EventButton}>
+                        style={styles.eventButton}>
                         <Text
                             style={styles.buttonText}>
                                 Create Event</Text>
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
         color:"#858483",
         textAlign:"center"
     },
-    EventButton: {
+    eventButton: {
         display:"flex",
         alignItems:"center",
         justifyContent:"center",
