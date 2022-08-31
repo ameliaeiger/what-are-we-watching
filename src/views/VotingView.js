@@ -1,6 +1,6 @@
 //IMPORTS
 import React, { useEffect, useState } from "react"
-import { View, TouchableOpacity, Text, StyleSheet } from "react-native"
+import { View, TouchableOpacity, Text, StyleSheet, Image } from "react-native"
 
 //LIBRARIES
 import Swiper from 'react-native-swiper'
@@ -44,7 +44,6 @@ const VotingView = ({ navigation }) => {
          />
         )
     }
-
     console.log(movieData.poster_path)
     return(
         <>
@@ -52,14 +51,24 @@ const VotingView = ({ navigation }) => {
             <>
             <Swiper style={styles.wrapper} showsButtons={true}>
                 <View style={styles.slide1}>
-                    <Text style={styles.text}>Hello Swiper</Text>
+                    <Image style={{height:"100%", width:"100%"}}source={{uri:"https://static.wikia.nocookie.net/shrek/images/8/85/Shrek_2001_poster.jpg/revision/latest/scale-to-width-down/1200?cb=20201020072731"}}/>
                 </View>
                 <View style={styles.slide2}>
-                    <Text style={styles.text}>Beautiful</Text>
+                    <Image style={{height:"100%", width:"100%"}}source={{uri:"https://resizing.flixster.com/dAiS2r0bFgqZ7eBWCH_0NuEb0_4=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzY0MjE3ZDU3LWFkNzUtNDAxNC04N2I3LWExNWQzNzFlOWEzNC53ZWJw"}}/>
                 </View>
                 <View style={styles.slide3}>
-                    <Text style={styles.text}>And simple</Text>
+                    <Image style={{height:"100%", width:"100%"}}source={{uri:"https://m.media-amazon.com/images/M/MV5BOTgyMjc3ODk2MV5BMl5BanBnXkFtZTcwMjY0MjEzMw@@._V1_.jpg"}}/>
                 </View>
+                <View style={styles.slide3}>
+                    <Image style={{height:"100%", width:"100%"}}source={{uri:"https://m.media-amazon.com/images/I/81nmtQ6sufL._SY445_.jpg"}}/>
+                </View>
+                <View style={styles.slide3}>
+                    <Image style={{height:"100%", width:"100%"}}source={{uri:"https://static.wikia.nocookie.net/dreamworks/images/e/e2/Shrek_5.jpg/revision/latest?cb=20210609030553"}}/>
+                </View>
+                <View style={styles.slide3}>
+                    <Image style={{height:"100%", width:"100%"}}source={{uri:"https://m.media-amazon.com/images/M/MV5BY2UzNDc2NWYtOWRmZS00YzQwLWE0NmYtM2NlNWNmYzNmYzAyXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg"}}/>
+                </View>
+
             </Swiper>
             {/* <HeroImage
                 poster={movieData.poster_path}
