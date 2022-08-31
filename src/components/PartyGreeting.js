@@ -6,7 +6,13 @@ const PartyGreeting = ({ navigation }) => {
     return(
         <View>
             <Text>
-                Welcome! Ready to start?
+                Welcome to *party name*, *username*!
+            </Text>
+            <Text>
+                Next, you'll be presented with several options. Click on the red button to reject the movie, or the green button to accept it.
+            </Text>
+            <Text>
+                Don't think; just swipe!
             </Text>
             <TouchableOpacity
                 title="begin"
