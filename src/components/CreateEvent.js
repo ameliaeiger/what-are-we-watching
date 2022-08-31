@@ -22,6 +22,13 @@ const CreateEvent = ({navigation, userId}) => {
         navigation.navigate("Voting", {eventId: data.JoinEvent.eventId})
     }
 
+    const handleAddEventPress = (e, navigation) => {
+        e.preventDefault()
+        console.log("create event pressed")
+        navigation.navigate("CreateEventView")
+
+    }
+
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
             <View
@@ -37,7 +44,7 @@ const CreateEvent = ({navigation, userId}) => {
                         />
                     <TouchableOpacity
                         title="Create Event"
-                        onPress={()=>navigation.navigate("CreateEventView")}
+                        onPress={(e) => handleAddEventPress(e, navigation)}
                         style={styles.createEventButton}>
                         <Text
                             style={styles.createEventButtonText}>
