@@ -11,7 +11,7 @@ import { useMutation, gql } from "@apollo/client"
       }
 `
 
-const CreateEvent = ({navigation, userId}) => {
+const CreateEvent = ({navigation, userData}) => {
     const [eventName, setEventName] = useState("Drew's Movie Fest")
     const [createEvent, { data, loading, error }] = useMutation(CREATE_USER_EVENT, { 
         variables: {eventName: eventName, userId: 12345}, 

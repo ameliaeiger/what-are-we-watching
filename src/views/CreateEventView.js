@@ -1,6 +1,7 @@
 //IMPORTS
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
 import { Text, View, StyleSheet, Dimensions, Modal, Alert, TouchableOpacity } from "react-native"
+import AppContext from "../components/AppContext.js";
 
 //ADDITIONAL LIBRARIES
 import { BlurView } from 'expo-blur';
@@ -38,8 +39,10 @@ const DATA = [
       date: 'September 22nd',
     },
   ]
-  
-  const CreateEventView = ({ navigation }) => {
+
+  const CreateEventView = ({ navigation, route }) => {
+    const myContext = useContext(AppContext)
+    console.log(myContext.userInfo)
     const [modalVisible, setModalVisible] = useState(false)
     const [blurOn, setBlurOn] = useState(false)
     const [eventName, setEventName] = useState("")
@@ -138,7 +141,6 @@ const DATA = [
     return(
       <BlurView intensity={100} tint="dark" style={`styles.${blurOn}`}>
         <View style={{height:windowHeight, width:windowWidth}}>   
-          {/* {console.log(data)} */}
             <CreateEvent navigation={navigation}/>
             {getDisplay()}
             {modalVisible && modal()}
