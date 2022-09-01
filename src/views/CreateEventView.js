@@ -1,6 +1,7 @@
 //IMPORTS
-import React, { useEffect, useState } from "react"
-import { Text, View, StyleSheet, Dimensions, Modal, Pressable, Alert, TouchableOpacity, Button } from "react-native"
+import React, { useEffect, useState, useContext } from "react"
+import { Text, View, StyleSheet, Dimensions, Modal, Alert, TouchableOpacity } from "react-native"
+import AppContext from "../components/AppContext.js";
 
 //ADDITIONAL LIBRARIES
 import { BlurView } from 'expo-blur';
@@ -38,8 +39,10 @@ const DATA = [
       date: 'September 22nd',
     },
   ]
-  
-  const CreateEventView = ({ navigation }) => {
+
+  const CreateEventView = ({ navigation, route }) => {
+    const myContext = useContext(AppContext)
+    console.log(myContext.userInfo)
     const [modalVisible, setModalVisible] = useState(false)
     const [blurOn, setBlurOn] = useState(false)
     const [eventName, setEventName] = useState("")
@@ -47,12 +50,18 @@ const DATA = [
     const windowWidth = Dimensions.get('window').width
     const windowHeight = Dimensions.get('window').height
 
+    const handleGoToPartyPress = (e) => {
+      e.preventDefault()
+      setModalVisible(!modalVisible)
+      navigation.navigate("VotingView")
+    }
+
     const modal = () => {
       return (
         <View style={styles.centeredView}>
           <Modal
             animationType="slide"
-            transparent={false}
+            transparent={true}
             visible={modalVisible}
             style={{backgroundColor: 'rgba(52, 52, 52, 0.3)', opacity:.5}}
             onRequestClose={() => {
@@ -63,10 +72,10 @@ const DATA = [
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
                 <Text style={styles.modalText}>Welcome to {eventName}!</Text>
-                <Text style={styles.modalText}>Ready to get started?</Text>
+                <Text style={{marginBottom:20}}>Ready to get started?</Text>
                 <TouchableOpacity
                   style={[styles.button, styles.buttonConfirm]}
-                  onPress={() => setModalVisible(!modalVisible)}
+                  onPress={(e) => handleGoToPartyPress(e)}
                 >
                   <Text style={styles.textStyle}>Let's Go!</Text>
                 </TouchableOpacity>                
@@ -79,18 +88,13 @@ const DATA = [
               </View>
             </View>
           </Modal>
-          {/* <Pressable
-            style={[styles.button, styles.buttonOpen]}
-            onPress={() => setModalVisible(true)}
-          >
-            <Text style={styles.textStyle}>Show Modal</Text>
-          </Pressable> */}
         </View>
       )}
     
     const toggleModal = (e, title) => {
       //HANDLE EVENT
       e.preventDefault()
+      console.log(`go to ${title} pressed`)
       setEventName(title)
   
       //NAVIGATE
@@ -137,7 +141,6 @@ const DATA = [
     return(
       <BlurView intensity={100} tint="dark" style={`styles.${blurOn}`}>
         <View style={{height:windowHeight, width:windowWidth}}>   
-          {/* {console.log(data)} */}
             <CreateEvent navigation={navigation}/>
             {getDisplay()}
             {modalVisible && modal()}
@@ -211,7 +214,6 @@ const styles = StyleSheet.create({
     textAlign: "center"
   },
   modalText: {
-    marginBottom: 15,
     textAlign: "center"
   },
 })

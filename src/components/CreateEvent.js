@@ -52,7 +52,7 @@ const CreateEvent = ({navigation, userId}) => {
                         />
                     <TouchableOpacity
                         title="Create Event"
-                        onPress={()=>navigation.navigate("CreateEventView")}
+                        onPress={(e) => handleAddEventPress(e, navigation)}
                         style={styles.createEventButton}>
                         <Text
                             style={styles.createEventButtonText}>
