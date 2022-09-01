@@ -1,6 +1,6 @@
 //IMPORTS
 import React, { useEffect, useState } from "react"
-import { Text, View, StyleSheet, Dimensions, Modal, Pressable, Alert, TouchableOpacity, Button } from "react-native"
+import { Text, View, StyleSheet, Dimensions, Modal, Alert, TouchableOpacity } from "react-native"
 
 //ADDITIONAL LIBRARIES
 import { BlurView } from 'expo-blur';
@@ -47,12 +47,18 @@ const DATA = [
     const windowWidth = Dimensions.get('window').width
     const windowHeight = Dimensions.get('window').height
 
+    const handleGoToPartyPress = (e) => {
+      e.preventDefault()
+      setModalVisible(!modalVisible)
+      navigation.navigate("VotingView")
+    }
+
     const modal = () => {
       return (
         <View style={styles.centeredView}>
           <Modal
             animationType="slide"
-            transparent={false}
+            transparent={true}
             visible={modalVisible}
             style={{backgroundColor: 'rgba(52, 52, 52, 0.3)', opacity:.5}}
             onRequestClose={() => {
@@ -63,10 +69,10 @@ const DATA = [
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
                 <Text style={styles.modalText}>Welcome to {eventName}!</Text>
-                <Text style={styles.modalText}>Ready to get started?</Text>
+                <Text style={{marginBottom:20}}>Ready to get started?</Text>
                 <TouchableOpacity
                   style={[styles.button, styles.buttonConfirm]}
-                  onPress={() => setModalVisible(!modalVisible)}
+                  onPress={(e) => handleGoToPartyPress(e)}
                 >
                   <Text style={styles.textStyle}>Let's Go!</Text>
                 </TouchableOpacity>                
@@ -79,18 +85,13 @@ const DATA = [
               </View>
             </View>
           </Modal>
-          {/* <Pressable
-            style={[styles.button, styles.buttonOpen]}
-            onPress={() => setModalVisible(true)}
-          >
-            <Text style={styles.textStyle}>Show Modal</Text>
-          </Pressable> */}
         </View>
       )}
     
     const toggleModal = (e, title) => {
       //HANDLE EVENT
       e.preventDefault()
+      console.log(`go to ${title} pressed`)
       setEventName(title)
   
       //NAVIGATE
@@ -211,7 +212,6 @@ const styles = StyleSheet.create({
     textAlign: "center"
   },
   modalText: {
-    marginBottom: 15,
     textAlign: "center"
   },
 })

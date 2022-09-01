@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react"
 import { View, StyleSheet, Image, Dimensions, TouchableOpacity } from "react-native"
 
-const HeroImage = ({poster, navigation}) => {
+const HeroImage = ({source, navigation}) => {
     const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;
-    const [image, setImage] = useState("")
+    // const [image, setImage] = useState("")
 
 
-    useEffect(() => {
-        setImage(
-            {
-                uri: `https://image.tmdb.org/t/p/original/${poster}`
-            }
-        )
-    },[])
+    // useEffect(() => {
+    //     setImage(
+    //         {
+    //             uri: `https://image.tmdb.org/t/p/original/${poster}`
+    //         }
+    //     )
+    // },[])
 
     return (
         <View
@@ -22,7 +22,7 @@ const HeroImage = ({poster, navigation}) => {
                     onPress={()=>navigation.navigate("Results")}>
                 <Image
                     style={{height:windowHeight, width:windowWidth}}
-                    source={image}
+                    source={source}
                      />
                 </TouchableOpacity>
         </View>

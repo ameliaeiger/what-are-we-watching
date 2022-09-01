@@ -12,7 +12,7 @@ import { useMutation, gql } from "@apollo/client"
 `;
 
 const LoginForm = ({navigation}) => {
-    const [userNameValue, setUserNameValue] = useState("User1")
+    const [userNameValue, setUserNameValue] = useState("")
 
     const [userLogin, { data, loading, error }] = useMutation(USER_LOGIN_CHECK, { 
         variables: {userName: userNameValue}, 

@@ -26,7 +26,6 @@ const CreateEvent = ({navigation, userId}) => {
         e.preventDefault()
         console.log("create event pressed")
         navigation.navigate("CreateEventView")
-
     }
 
     return(
