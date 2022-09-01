@@ -7,12 +7,12 @@ import { useMutation, gql } from "@apollo/client"
         CreateEvent(eventName: $eventName, userid: $userId) {
             userId
             eventName
-          }
-      }
+        }
+    }
 `
 
 const CreateEvent = ({navigation, userId}) => {
-    const [eventName, setEventName] = useState("Drew's Movie Fest")
+    const [eventName, setEventName] = useState("")
     const [createEvent, { data, loading, error }] = useMutation(CREATE_USER_EVENT, { 
         variables: {eventName: eventName, userId: 12345}, 
         onCompleted: () => goToEvent() 
@@ -20,6 +20,21 @@ const CreateEvent = ({navigation, userId}) => {
 
     const goToEvent = () => {
         navigation.navigate("Voting", {eventId: data.JoinEvent.eventId})
+    }
+
+    const handleEventInput = (text) => {
+        console.log('input', text)
+        setEventName(text)
+    }
+
+    const handleAddEventPress = (e, navigation) => {
+        e.preventDefault()
+        console.log("create event pressed")
+        const newEvent = {
+            id: Date.now(),
+            eventName
+        }
+        navigation.navigate("CreateEventView")
     }
 
     return(
