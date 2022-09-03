@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from "react-native"
+import EventsList from "./EventsList"
 import { useMutation, gql } from "@apollo/client"
 
 const CREATE_USER_EVENT = gql`
@@ -47,6 +48,16 @@ const CREATE_USER_EVENT = gql`
     //         eventName
     //     }
     // }
+
+    // {
+    //     "data": {
+    //         "CreateUser": {
+    //             "userName": "User2",
+    //             "userId": "211270"
+    //         }
+    //     }
+    // }
+
     const CreateEvent = ({navigation, userId}) => {
     const [eventName, setEventName] = useState("")
     const [createEvent, { data, loading, error }] = useMutation(CREATE_USER_EVENT, { 
@@ -94,6 +105,7 @@ const CREATE_USER_EVENT = gql`
                             style={styles.createEventButtonText}>
                                 +</Text>
                     </TouchableOpacity>
+                    {/* <EventsList data={data}/> */}
                     {loading && <Text>Creating event...</Text>}
                     {error && <Text>There was a problem creating your event</Text>}
                     {data && <Text>{data.JoinEvent.eventId}</Text>}

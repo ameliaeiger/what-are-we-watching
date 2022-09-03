@@ -37,13 +37,13 @@ export default function App() {
 
   const LoginScreen = ({navigation}) => {
     return(
-      <LandingView navigation={navigation}/>
+      <LandingView navigation={navigation} />
     )
   }
   
   const PartyScreen = ({navigation}) => {
     return (
-      <CreateEventView navigation={navigation}/>
+      <CreateEventView navigation={navigation} />
     )
   }
   

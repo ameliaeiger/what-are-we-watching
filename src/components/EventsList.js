@@ -3,7 +3,7 @@ import { View, Text, FlatList, StyleSheet } from "react-native"
 
 import EventListItem from "./EventListItem"
 
-const EventsList = ({ navigation, toggleModal, data}) => {
+const EventsList = ({ navigation, toggleModal, userEvents }) => {
 
     return(
         <View
@@ -11,7 +11,7 @@ const EventsList = ({ navigation, toggleModal, data}) => {
             <Text
                 style={styles.eventsListText}>Events</Text>
             <FlatList
-                data={data.events}
+                data={userEvents}
                 contentContainerStyle={{flexGrow:1}}
                 renderItem={({item}) => (<EventListItem title={item.name} navigation={navigation} toggleModal={toggleModal} guest={item.guestId}/>)}
                 keyExtractor={item => item.name}/>
