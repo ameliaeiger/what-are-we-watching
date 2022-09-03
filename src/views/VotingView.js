@@ -15,32 +15,32 @@ import movieData from "../../moviedata.js"
 const VotingView = ({ navigation }) => {
     const [currentMovie, setCurrentMovie] = useState(movieData.poster_path)
     const [loaded, setLoaded] = useState(false)
-    const [currentMovieIndex, setCurrentMovieIndex] = useState(1)
+    const [currentMovieIndex, setCurrentMovieIndex] = useState(0)
     const [movieChunk, setMovieChunk] = useState(
         [
             {
-            id: 0,
+            id: 1,
             uri: "https://static.wikia.nocookie.net/shrek/images/8/85/Shrek_2001_poster.jpg/revision/latest/scale-to-width-down/1200?cb=20201020072731"
         }, 
             {
-            id: 1,
+            id: 2,
             uri: "https://resizing.flixster.com/dAiS2r0bFgqZ7eBWCH_0NuEb0_4=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzY0MjE3ZDU3LWFkNzUtNDAxNC04N2I3LWExNWQzNzFlOWEzNC53ZWJw"
         },
             {
-            id: 2,
+            id: 3,
             uri: "https://m.media-amazon.com/images/M/MV5BOTgyMjc3ODk2MV5BMl5BanBnXkFtZTcwMjY0MjEzMw@@._V1_.jpg"
         },
             {
-            id: 3,
-                uri: "https://m.media-amazon.com/images/I/81nmtQ6sufL._SY445_.jpg"
+            id: 4,
+            uri: "https://m.media-amazon.com/images/I/81nmtQ6sufL._SY445_.jpg"
         },
             {
-            id:4,
-                uri: "https://static.wikia.nocookie.net/dreamworks/images/e/e2/Shrek_5.jpg/revision/latest?cb=20210609030553"
+            id: 5,
+            uri: "https://static.wikia.nocookie.net/dreamworks/images/e/e2/Shrek_5.jpg/revision/latest?cb=20210609030553"
         },
             {
-            id:5,
-                uri: "https://m.media-amazon.com/images/M/MV5BY2UzNDc2NWYtOWRmZS00YzQwLWE0NmYtM2NlNWNmYzNmYzAyXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg"
+            id: 6,
+            uri: "https://m.media-amazon.com/images/M/MV5BY2UzNDc2NWYtOWRmZS00YzQwLWE0NmYtM2NlNWNmYzNmYzAyXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg"
         },
 ])
 
@@ -77,11 +77,20 @@ const VotingView = ({ navigation }) => {
     }
 
     const handleVotePress = (e, isTrue) => {
+        console.log("current movie index", currentMovieIndex)
+        if (currentMovieIndex<6){
+            let votingObject = {
+                id: movieChunk[currentMovieIndex].id,
+                uri: movieChunk[currentMovieIndex].uri,
+                vote: isTrue
+            }    
+            console.log(votingObject)
+        }
+        if (currentMovieIndex===6){
+            console.log("end of chunk")
+            return
+        }
         setCurrentMovieIndex(currentMovieIndex+1)
-        console.log("currentMovieIndex: ", currentMovieIndex)
-        console.log("Movie URI", movieChunk[currentMovieIndex])
-        console.log(isTrue)
-
     }
    
     return(
