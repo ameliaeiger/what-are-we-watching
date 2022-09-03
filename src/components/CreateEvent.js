@@ -42,6 +42,7 @@ const CREATE_USER_EVENT = gql`
     //     }
     //   }
     
+    // OUR ORIGINAL SETUP:
     // mutation CreateEvent($eventId: eventId!, $userId:Userid!) {
     //     CreateEvent(eventName: $eventName, userid: $userId) {
     //         userId

@@ -8,7 +8,7 @@ const ThumbnailImage = () => {
             style={styles.container}>
             <Image
                 style={styles.image}
-                source={{"https://static.wikia.nocookie.net/shrek/images/8/85/Shrek_2001_poster.jpg/revision/latest/scale-to-width-down/1200?cb=20201020072731"}}
+                source={"https://static.wikia.nocookie.net/shrek/images/8/85/Shrek_2001_poster.jpg/revision/latest/scale-to-width-down/1200?cb=20201020072731"}
             />
         </View>
     )

@@ -4,18 +4,29 @@ import { useMutation,  gql } from "@apollo/client"
 import AppContext from "./AppContext"
 
     const USER_LOGIN_CHECK = gql`
-    mutation createUser($name: name!) {
-        createUser(input: {name: $name}) {
+    mutation {
+        createUser(input: {
+        name: $name
+        }) {
+        user {
             name
-            userId
+            id
+        }
+        errors
         }
     }
     `
-// user {
-//     name
-//   }
-//   errors
-
+    // user {
+        //     name
+        //   }
+        //   errors
+        
+        // mutation createUser($name: name!) {
+        //     createUser(input: {name: $name}) {
+        //         name
+        //         userId
+        //     }
+        // }
 const userData = [
     {
         "userName": "User1",
