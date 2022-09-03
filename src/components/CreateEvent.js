@@ -5,7 +5,7 @@ import { useMutation, gql } from "@apollo/client"
 
 const CREATE_USER_EVENT = gql`
     mutation createEvent($eventId: eventId!, $userId: Userid!, $date: date!) {
-        createEvent(name: $name, userId: $userId, date: $date) {
+        createEvent(input: {name: $name, userId: $userId, date: $date}) {
             date
             userId
             name
