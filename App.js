@@ -79,7 +79,6 @@ export default function App() {
             <Stack.Navigator>
               <Stack.Screen name='Landing' component={LoginScreen} options={{title:"login"}} />
               <Stack.Screen name='CreateEventView' component={PartyScreen} options={logoutOption} />
-              <Stack.Screen name='PartyView' component={PartyView} options={logoutOption} />
               <Stack.Screen name='VotingView' component={SwipingScreen} options={logoutOption} />
               <Stack.Screen name='Results' component={MatchScreen} options={logoutOption} />
             </Stack.Navigator>

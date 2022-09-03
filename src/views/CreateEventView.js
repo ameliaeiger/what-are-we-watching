@@ -50,7 +50,7 @@ const DATA = [
     const windowWidth = Dimensions.get('window').width
     const windowHeight = Dimensions.get('window').height
 
-    const handleGoToPartyPress = (e) => {
+    const handleGoToPartyPress = (e, navigation) => {
       e.preventDefault()
       setModalVisible(!modalVisible)
       navigation.navigate("VotingView")
@@ -75,7 +75,7 @@ const DATA = [
                 <Text style={{marginBottom:20}}>Ready to get started?</Text>
                 <TouchableOpacity
                   style={[styles.button, styles.buttonConfirm]}
-                  onPress={(e) => handleGoToPartyPress(e)}
+                  onPress={(e) => handleGoToPartyPress(e, navigation)}
                 >
                   <Text style={styles.textStyle}>Let's Go!</Text>
                 </TouchableOpacity>                
