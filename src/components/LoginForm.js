@@ -3,6 +3,29 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity, TouchableWithoutFe
 import { useMutation, gql } from "@apollo/client"
 import AppContext from "./AppContext"
 
+    const USER_LOGIN_CHECK = gql`
+    mutation createUser($input: CreateUserInput!) {
+        createUser(input: $input) {
+            user {
+                name
+                id
+            }
+        }
+    }
+    `
+    // user {
+        //     name
+        //   }
+        //   errors
+        
+        //OUR ORIGINAL SETUIP:
+        // mutation createUser($name: name!) {
+        //     createUser(input: {name: $name}) {
+        //         name
+        //         userId
+        //     }
+        // }
+
 const userData = [
     {
         "userName": "User1",

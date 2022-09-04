@@ -1,16 +1,18 @@
+//IMPORTS
 import React from "react"
-
+import { View } from "react-native"
 import Header from "../components/Header.js"
 import Result from "../components/Result.js"
+//import ThumbnailImage from "../components/ThumbnailImage.js"
 
 
 const ResultsView = () => {
 
     return(
-        <>
-        <Header />
-        <Result />
-        </>
+        <View>
+            <Header />
+            <Result />
+        </View>
     )
 }
 
