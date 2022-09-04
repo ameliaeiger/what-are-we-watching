@@ -40,7 +40,7 @@ const DATA = [
     },
   ]
 
-  const CreateEventView = ({ navigation, route }) => {
+  const CreateEventView = ({ navigation, globals }) => {
     const myContext = useContext(AppContext)
     console.log(myContext.userInfo)
     const [modalVisible, setModalVisible] = useState(false)
@@ -109,18 +109,18 @@ const DATA = [
     //END
 
     const getDisplay = () => {
-      if (loading){
-        return <Text>loading...</Text>
-      } else if  (!loading && !error && data) {
+      // if (loading){
+      //   return <Text>loading...</Text>
+      // } else if  (!loading && !error && data) {
         return(
           <EventsList
-            data={data}
+            // data={data}
             toggleModal={toggleModal}
             navigation={navigation} />
           )
-      } else {
-        return <Text>Oops! There was an error loading the page. Please try again.</Text>
-      }
+      // } else {
+      //   return <Text>Oops! There was an error loading the page. Please try again.</Text>
+      // }
     }
 
     useEffect(() => {

@@ -1,17 +1,30 @@
 import React, { useState, useContext } from "react"
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Keyboard, useWindowDimensions, Alert } from "react-native"
-import { useMutation, gql } from "@apollo/client"
+import { useMutation,  gql } from "@apollo/client"
 import AppContext from "./AppContext"
 
     const USER_LOGIN_CHECK = gql`
-    mutation CreateUser($userName: userName!) {
-        CreateUser(userName: $userName) {
-            userName
-            userId
+    mutation createUser($input: CreateUserInput!) {
+        createUser(input: $input) {
+            user {
+                name
+                id
+            }
         }
     }
-`
-
+    `
+    // user {
+        //     name
+        //   }
+        //   errors
+        
+        //OUR ORIGINAL SETUIP:
+        // mutation createUser($name: name!) {
+        //     createUser(input: {name: $name}) {
+        //         name
+        //         userId
+        //     }
+        // }
 const userData = [
     {
         "userName": "User1",
@@ -27,22 +40,33 @@ const userData = [
     },
 ]
 
+// {
+//     "userName": "User2"
+//   }
+
 const LoginForm = ({navigation}) => {
     const globals = useContext(AppContext);
+    const [currentUser, setCurrentUser] = useState("")
     const [userNameValue, setUserNameValue] = useState("")
     const [loginError, setLoginError] = useState(false)
 
     const [userLogin, { data, loading, error }] = useMutation(USER_LOGIN_CHECK, { 
-        variables: {userName: userNameValue}, 
-        onCompleted: () => runLogin() 
+        variables: {"userName": globals.userNameValue }, 
+        onCompleted: () => navigation.navigate("CreateEventView") 
     })
 
-    const runLogin = () => {
-        if (globals.setLoggedIn){
-            navigation.navigate("CreateEventView", {userData: (userData.find((user) => user.userName === userNameValue))})
-        } else if (userData.find((user) => user.userName === userNameValue)) {
-            globals.setLoggedIn(true)
-            globals.setUserInfo(userData.find((user) => user.userName === userNameValue))
+    const runLogin = (e) => {
+        console.log('initial login value', globals.setLoggedIn)
+    //  if (globals.setLoggedIn === false) {
+    // if (userData.find((user) => user.userName === userNameValue)) 
+        console.log('login trigger')
+        globals.setLoggedIn(true)
+        globals.setUserInfo(userNameValue)
+        userLogin()
+        console.log('falsey', globals)
+     //}
+       if (globals.setLoggedIn){
+            navigation.navigate("CreateEventView")
         } else {
             setLoginError(true)
         }
@@ -61,7 +85,7 @@ const LoginForm = ({navigation}) => {
                             />
                         <TouchableOpacity
                             title="Login"
-                            onPress={() => runLogin()}
+                            onPress={(e) => runLogin(e)}
                             style={styles.loginButton}>
                             <Text
                                 style={styles.buttonText}>

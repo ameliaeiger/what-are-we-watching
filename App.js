@@ -17,12 +17,12 @@ import PartyView from "./src/views/PartyView"
 const Stack = createNativeStackNavigator()
 // import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
-
 //APOLLO
 const client = new ApolloClient ({
-	cache: new InMemoryCache(),
-	uri: 'https://7faa1aa4-3de7-4b85-8d00-12221883cecb.mock.pstmn.io/graphql/events',
+  uri: 'https://7faa1aa4-3de7-4b85-8d00-12221883cecb.mock.pstmn.io/graphql/events',
+  cache: new InMemoryCache(),
 })
+// uri: 'https://what-are-we-watching-be.herokuapp.com/graphql',
 
 
 export default function App() {
@@ -38,13 +38,13 @@ export default function App() {
 
   const LoginScreen = ({navigation}) => {
     return(
-      <LandingView navigation={navigation}/>
+      <LandingView navigation={navigation} />
     )
   }
   
   const PartyScreen = ({navigation}) => {
     return (
-      <CreateEventView navigation={navigation}/>
+      <CreateEventView navigation={navigation} />
     )
   }
   

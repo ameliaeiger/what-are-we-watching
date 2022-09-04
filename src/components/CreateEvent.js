@@ -1,17 +1,65 @@
 import React, { useState } from "react"
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from "react-native"
+import EventsList from "./EventsList"
 import { useMutation, gql } from "@apollo/client"
 
-    const CREATE_USER_EVENT = gql`
-    mutation CreateEvent($eventId: eventId!, $userId:Userid!) {
-        CreateEvent(eventName: $eventName, userid: $userId) {
+const CREATE_USER_EVENT = gql`
+    mutation createEvent($eventId: eventId!, $userId: Userid!, $date: date!) {
+        createEvent(input: {name: $name, userId: $userId, date: $date}) {
+            date
             userId
-            eventName
+            name
         }
     }
 `
+    // mutation {
+    //     createEvent(input: {
+    //         date: "9/1/2022",
+    //         name: "Parker",
+    //         userId: 1
+    //     }) {
+    //         event {
+    //             date
+    //             name
+    //             userId
+    //     }
+    //         errors
+    //     }
+    // }
 
-const CreateEvent = ({navigation, userId}) => {
+    // mutation {
+    //     createEvent(input: {
+    //       date: "9/1/2022",
+    //       name: "Parker",
+    //       $userId:Userid!
+    //     }) {
+    //       event {
+    //         date
+    //         name
+    //         userId
+    //       }
+    //       errors
+    //     }
+    //   }
+    
+    // OUR ORIGINAL SETUP:
+    // mutation CreateEvent($eventId: eventId!, $userId:Userid!) {
+    //     CreateEvent(eventName: $eventName, userid: $userId) {
+    //         userId
+    //         eventName
+    //     }
+    // }
+
+    // {
+    //     "data": {
+    //         "CreateUser": {
+    //             "userName": "User2",
+    //             "userId": "211270"
+    //         }
+    //     }
+    // }
+
+    const CreateEvent = ({navigation, userId}) => {
     const [eventName, setEventName] = useState("")
     const [createEvent, { data, loading, error }] = useMutation(CREATE_USER_EVENT, { 
         variables: {eventName: eventName, userId: 12345}, 
@@ -58,9 +106,10 @@ const CreateEvent = ({navigation, userId}) => {
                             style={styles.createEventButtonText}>
                                 +</Text>
                     </TouchableOpacity>
-                    {/* {loading && <Text>Creating event...</Text>}
+                    {/* <EventsList data={data}/> */}
+                    {loading && <Text>Creating event...</Text>}
                     {error && <Text>There was a problem creating your event</Text>}
-                    {data && <Text>{data.JoinEvent.eventId}</Text>} */}
+                    {data && <Text>{data.JoinEvent.eventId}</Text>}
                 </View>
             </View>
         </TouchableWithoutFeedback>
