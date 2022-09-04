@@ -40,15 +40,21 @@ const DATA = [
     },
   ]
 
-  const CreateEventView = ({ navigation, globals }) => {
+  const CreateEventView = ({ navigation }) => {
     const myContext = useContext(AppContext)
-    console.log(myContext.userInfo)
+    // console.log("CreateEventView Context: ", myContext.userInfo)
     const [modalVisible, setModalVisible] = useState(false)
     const [blurOn, setBlurOn] = useState(false)
     const [eventName, setEventName] = useState("")
     const {data, loading, error} = useQuery(GET_ALL_EVENTS)
     const windowWidth = Dimensions.get('window').width
     const windowHeight = Dimensions.get('window').height
+
+    // const [getEvents, { data, loading, error }] = useQuery(GET_ALL_EVENTS)
+    
+    // useEffect(() => {
+    //   getEvents()
+    // },[])
 
     const handleGoToPartyPress = (e, navigation) => {
       e.preventDefault()
@@ -109,6 +115,7 @@ const DATA = [
     //END
 
     const getDisplay = () => {
+      // console.log(data)
       // if (loading){
       //   return <Text>loading...</Text>
       // } else if  (!loading && !error && data) {
@@ -124,16 +131,16 @@ const DATA = [
     }
 
     useEffect(() => {
-      console.log("modal visible use effect: ", modalVisible)
+      // console.log("modal visible use effect: ", modalVisible)
       toggleBlur()
     },[modalVisible])
 
     const toggleBlur = () => {
       if (modalVisible){
-        console.log("visible")
+        // console.log("visible")
         setBlurOn("blurContainer")
       } else {
-        console.log("hidden")
+        // console.log("hidden")
         setBlurOn("blurContainerHidden")
       }
     }

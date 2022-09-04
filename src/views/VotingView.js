@@ -1,6 +1,6 @@
 //IMPORTS
 import React, { useEffect, useState } from "react"
-import { View, TouchableOpacity, Text, StyleSheet, Image } from "react-native"
+import { View, TouchableOpacity, Text, StyleSheet, Image, Button } from "react-native"
 
 //LIBRARIES
 import Swiper from 'react-native-swiper'
@@ -8,6 +8,7 @@ import Swiper from 'react-native-swiper'
 //COMPONENTS
 import HeroImage from "../components/HeroImage.js"
 import Loading from "../components/Loading.js"
+import VotingButton from "../components/VotingButton.js"
 
 //DATA
 import movieData from "../../moviedata.js"
@@ -54,7 +55,7 @@ const VotingView = ({ navigation }) => {
         return fetch(url)
             .then(response => response.json())
             .then(data => {
-               console.log(data)
+            //    console.log(data)
                return data
             })
     }
@@ -97,7 +98,9 @@ const VotingView = ({ navigation }) => {
         <>
         {loaded ? 
             <>
-            <Swiper style={styles.wrapper} showsButtons={true}>
+            <Swiper style={styles.wrapper} showsButtons={true} loop={false}
+            prevButton={<VotingButton handleVotePress={handleVotePress} text="no" boolVal={false}/>} 
+            nextButton={<VotingButton handleVotePress={handleVotePress} text="yes" boolVal={true}/>}>
                 <View style={styles.slide1}>
                     {getHeroImage(movieChunk[0].uri, handleVotePress)}
                 </View>

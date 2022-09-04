@@ -27,7 +27,7 @@ const client = new ApolloClient ({
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false)
-  const [userInfo, setUserInfo] = useState({})
+  const [userInfo, setUserInfo] = useState("")
 
   const globals = {
     loggedIn: loggedIn,
