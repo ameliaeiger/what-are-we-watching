@@ -29,18 +29,22 @@ export default function App() {
   // NEW //
 
   const [allUserEvents, setAllUserEvents] = useState("")
+  const [currentUser, setCurrentUser] = useState("")
 
   // END //
   const [loggedIn, setLoggedIn] = useState(false)
   const [userInfo, setUserInfo] = useState("")
 
   const globals = {
+
     // NEW //
 
+    currentUser: currentUser,
     allUserEvents: allUserEvents,
     setAllUserEvents: setAllUserEvents,
 
     // END //
+
     loggedIn: loggedIn,
     setLoggedIn: setLoggedIn,
     userInfo: userInfo,
@@ -75,12 +79,18 @@ export default function App() {
     return ({
       headerRight: () => (
       <Button
-          onPress={() => navigation.navigate("Landing")}
+          onPress={() => userLogout(navigation)}
           title="logout"
           color="#F37180"
         />
       ),
       })
+    }
+
+    const userLogout = (navigation) => {
+      setUserInfo("")
+      setLoggedIn(false)
+      navigation.navigate("Landing")
     }
 
   return (
