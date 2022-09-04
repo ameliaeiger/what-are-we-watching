@@ -4,15 +4,12 @@ import { useMutation,  gql } from "@apollo/client"
 import AppContext from "./AppContext"
 
     const USER_LOGIN_CHECK = gql`
-    mutation {
-        createUser(input: {
-        name: $name
-        }) {
-        user {
-            name
-            id
-        }
-        errors
+    mutation createUser($input: CreateUserInput!) {
+        createUser(input: $input) {
+            user {
+                name
+                id
+            }
         }
     }
     `
@@ -21,6 +18,7 @@ import AppContext from "./AppContext"
         //   }
         //   errors
         
+        //OUR ORIGINAL SETUIP:
         // mutation createUser($name: name!) {
         //     createUser(input: {name: $name}) {
         //         name
