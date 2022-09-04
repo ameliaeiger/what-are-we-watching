@@ -13,18 +13,6 @@ import AppContext from "./AppContext"
         }
     }
     `
-    // user {
-        //     name
-        //   }
-        //   errors
-        
-        //OUR ORIGINAL SETUIP:
-        // mutation createUser($name: name!) {
-        //     createUser(input: {name: $name}) {
-        //         name
-        //         userId
-        //     }
-        // }
 
 const userData = [
     {
@@ -45,18 +33,6 @@ const userData = [
     },
 ]
 
-const USER_LOGIN_CHECK = gql`
-mutation createUser($input: CreateUserInput!){
-    createUser(input: $input) {
-        user {
-            id
-            name
-        }
-    }
-}`
-   
-
-
 
 const LoginForm = ({navigation}) => {
     const globals = useContext(AppContext);
@@ -73,12 +49,18 @@ const [userLogin, { data, loading, error }] = useMutation(USER_LOGIN_CHECK, {
     const testInfo = (data) => {
         console.log("POST SENT")
         navigation.navigate("CreateEventView")
-        console.log("RESPONSE: ", data)
+        // NEW //
+
+        globals.setAllUserEvents(data)
+        console.log("allUserEvents GLOBAL: ", globals.allUserEvents)
+
+        // END //
         console.log("----------------")
     }
 
+        // RUNS ON BUTTON PRESS
     const runLogin = (e) => {
-        // let isUser = userData.find((user) => user.userName === userNameValue)
+        e.preventDefault()
         if (!userNameValue) {
             return Alert.alert("Please enter a username")
         }
@@ -86,31 +68,9 @@ const [userLogin, { data, loading, error }] = useMutation(USER_LOGIN_CHECK, {
             console.log("TEXT INPUT FIELD VALUE: ", userNameValue)
             globals.setUserInfo(userNameValue)
             globals.setLoggedIn(true)
-            // userLogin()
+            userLogin()
         }
-        // if (globals.setLoggedIn && userNameValue) {
-            // console.log("USER LOGIN TRIGGERED")
-        // }
-     //}
-    //    if (globals.setLoggedIn){
-    //         navigation.navigate("CreateEventView")
-    //     } else {
-    //         setLoginError(true)
-    //     }
     }
-     
-            
-    //         {
-    //     name: 
-    //     }) {
-    //         user {
-    //         name
-    //         id
-    //         }
-    //         errors
-    //     }
-    // }
-    // `
 
     useEffect(() => {
         console.log("useEffect: --", userNameValue)
@@ -119,11 +79,12 @@ const [userLogin, { data, loading, error }] = useMutation(USER_LOGIN_CHECK, {
     useEffect(() => {
         if (!globals.loggedIn){
             console.log("Please log in.")
+            return
         } else {
-            userLogin()
             console.log("----------------")
             console.log("USER LOGIN TRIGGERED")
             console.log(`You are now logged in, ${globals.userInfo}`)
+            return
         }
     },[globals.loggedIn])
 
