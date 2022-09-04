@@ -26,10 +26,21 @@ const client = new ApolloClient ({
 
 
 export default function App() {
+  // NEW //
+
+  const [allUserEvents, setAllUserEvents] = useState("")
+
+  // END //
   const [loggedIn, setLoggedIn] = useState(false)
   const [userInfo, setUserInfo] = useState("")
 
   const globals = {
+    // NEW //
+
+    allUserEvents: allUserEvents,
+    setAllUserEvents: setAllUserEvents,
+
+    // END //
     loggedIn: loggedIn,
     setLoggedIn: setLoggedIn,
     userInfo: userInfo,
