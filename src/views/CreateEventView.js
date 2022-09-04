@@ -4,7 +4,7 @@ import { Text, View, StyleSheet, Dimensions, Modal, Alert, TouchableOpacity } fr
 import AppContext from "../components/AppContext.js";
 
 //ADDITIONAL LIBRARIES
-import { BlurView } from 'expo-blur';
+// import { BlurView } from 'expo-blur';
 
 //COMPONENTS
 import CreateEvent from "../components/CreateEvent.js"
@@ -41,8 +41,8 @@ const DATA = [
   ]
 
   const CreateEventView = ({ navigation }) => {
-    const myContext = useContext(AppContext)
-    // console.log("CreateEventView Context: ", myContext.userInfo)
+    const globals = useContext(AppContext)
+    // console.log("CreateEventView Context: ", globals.userInfo)
     const [modalVisible, setModalVisible] = useState(false)
     const [blurOn, setBlurOn] = useState(false)
     const [eventName, setEventName] = useState("")
@@ -115,35 +115,27 @@ const DATA = [
     //END
 
     const getDisplay = () => {
-      // console.log(data)
       // if (loading){
       //   return <Text>loading...</Text>
       // } else if  (!loading && !error && data) {
         return(
           <EventsList
-            // data={data}
             toggleModal={toggleModal}
             navigation={navigation} />
           )
-      // } else {
-      //   return <Text>Oops! There was an error loading the page. Please try again.</Text>
-      // }
     }
 
-    useEffect(() => {
-      // console.log("modal visible use effect: ", modalVisible)
-      toggleBlur()
-    },[modalVisible])
+    // useEffect(() => {
+    //   toggleBlur()
+    // },[modalVisible])
 
-    const toggleBlur = () => {
-      if (modalVisible){
-        // console.log("visible")
-        setBlurOn("blurContainer")
-      } else {
-        // console.log("hidden")
-        setBlurOn("blurContainerHidden")
-      }
-    }
+    // const toggleBlur = () => {
+    //   if (modalVisible){
+    //     setBlurOn("blurContainer")
+    //   } else {
+    //     setBlurOn("blurContainerHidden")
+    //   }
+    // }
 
     return(
       <BlurView intensity={100} tint="dark" style={`styles.${blurOn}`}>
