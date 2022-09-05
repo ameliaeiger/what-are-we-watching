@@ -28,9 +28,6 @@ import AppContext from "./AppContext"
         }
     `
 
-    
-
-
 
 const LoginForm = ({navigation}) => {
     const globals = useContext(AppContext);
@@ -93,8 +90,6 @@ const LoginForm = ({navigation}) => {
         navigation.navigate("CreateEventView")
         console.log("----------------")
     }
-
-    //      ^^^^^^^ GRAPHQL ^^^^^^^^            //
 
     useEffect(() => {
         if (!globals.loggedIn){
