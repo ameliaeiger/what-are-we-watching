@@ -1,5 +1,5 @@
 //IMPORTS
-import React from "react"
+import React, { useContext } from "react"
 import { View, Text, FlatList, StyleSheet } from "react-native"
 import AppContext from "../components/AppContext.js";
 
@@ -9,7 +9,6 @@ import EventListItem from "./EventListItem"
 const EventsList = ({ navigation, toggleModal }) => {
     const globals = useContext(AppContext)
 
-    console.log("ALL USER EVENTS EVENT LIST: ", globals.allUserEvents)
 
     return(
         <View
@@ -17,7 +16,7 @@ const EventsList = ({ navigation, toggleModal }) => {
             <Text
                 style={styles.eventsListText}>Events</Text>
             <FlatList
-                data={allUserEvents}
+                // data={allUserEvents}
                 contentContainerStyle={{flexGrow:1}}
                 renderItem={({item}) => (<EventListItem title={item.name} guest={item.guestId} navigation={navigation} toggleModal={toggleModal} />)}
                 keyExtractor={item => item.name}/>

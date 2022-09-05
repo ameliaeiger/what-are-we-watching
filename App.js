@@ -19,36 +19,27 @@ const Stack = createNativeStackNavigator()
 
 //APOLLO
 const client = new ApolloClient ({
-  uri: 'https://7faa1aa4-3de7-4b85-8d00-12221883cecb.mock.pstmn.io/graphql/events',
+  uri: 'https://what-are-we-watching-be.herokuapp.com/graphql',
   cache: new InMemoryCache(),
 })
-// uri: 'https://what-are-we-watching-be.herokuapp.com/graphql',
 
 
 export default function App() {
-  // NEW //
-
   const [allUserEvents, setAllUserEvents] = useState("")
-  const [currentUser, setCurrentUser] = useState("")
-
-  // END //
+  const [currentEvent, setCurrentEvent] = useState("")
   const [loggedIn, setLoggedIn] = useState(false)
   const [userInfo, setUserInfo] = useState("")
 
   const globals = {
-
-    // NEW //
-
-    currentUser: currentUser,
-    allUserEvents: allUserEvents,
-    setAllUserEvents: setAllUserEvents,
-
-    // END //
-
     loggedIn: loggedIn,
-    setLoggedIn: setLoggedIn,
     userInfo: userInfo,
-    setUserInfo: setUserInfo
+    currentEvent: currentEvent,
+    allUserEvents: allUserEvents,
+
+    setUserInfo: setUserInfo,
+    setCurrentEvent: setCurrentEvent,
+    setAllUserEvents: setAllUserEvents,
+    setLoggedIn: setLoggedIn,
   }
 
   const LoginScreen = ({navigation}) => {
@@ -89,8 +80,11 @@ export default function App() {
 
     const userLogout = (navigation) => {
       setUserInfo("")
+      setCurrentEvent("")
+      setAllUserEvents("")
       setLoggedIn(false)
       navigation.navigate("Landing")
+      console.log("> USER LOGOUT <")
     }
 
   return (

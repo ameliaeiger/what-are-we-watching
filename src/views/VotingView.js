@@ -1,6 +1,7 @@
 //IMPORTS
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
 import { View, TouchableOpacity, Text, StyleSheet, Image, Button } from "react-native"
+import AppContext from "../components/AppContext.js"
 
 //LIBRARIES
 import Swiper from 'react-native-swiper'
@@ -10,11 +11,55 @@ import HeroImage from "../components/HeroImage.js"
 import Loading from "../components/Loading.js"
 import VotingButton from "../components/VotingButton.js"
 
-//DATA
-import movieData from "../../moviedata.js"
+//APOLLO
+import { gql, useQuery } from '@apollo/client'
+
+//GRAPHQL QUERY
+const GET_MOVIE_CHUNK = gql`
+    query getChunk($eventId: ID!, $lastMovieId: ID!){
+        getChunk (eventId: $eventId, lastMovieId: $lastMovieId){
+            id
+            image
+            title
+        }
+    }`
 
 const VotingView = ({ navigation }) => {
-    const [currentMovie, setCurrentMovie] = useState(movieData.poster_path)
+    // NEW //
+    // CONTEXT
+    const globals = useContext(AppContext)
+
+    //GRAPHQL QUERY
+
+
+    // const [getMovies, { data, loading, error }] = useQuery(GET_MOVIE_CHUNK, { 
+    // const runQuery = () => {
+    //     console.log("run query triggered")
+    //         const { data, loading, error } = useQuery(GET_MOVIE_CHUNK, { 
+    //         variables: {"eventId": 0, "lastMovieId": 0 }, 
+    //         onCompleted: () => onCompleted(data)
+    //     })
+    //     console.log("loading: ", loading)
+    //     console.log("RUN QUERY: ", data)
+    // }
+            // variables: {"eventId": eventId, "lastMovieId": lastMovieId }, 
+
+
+    const onCompleted = (data) => {
+        console.log("----------------")
+        console.log("> POST COMPLETED <")
+        console.log("Good ol' data: ", data)
+        // console.log("id: ", data.createUser.user.id)
+        // console.log("name: ", data.createUser.user.name)
+
+
+        // navigation.navigate("CreateEventView")
+        console.log("----------------")
+    }
+    // END //
+
+    
+    // const [currentMovie, setCurrentMovie] = query(movieData.poster_path)
     const [loaded, setLoaded] = useState(false)
     const [currentMovieIndex, setCurrentMovieIndex] = useState(0)
     const [movieChunk, setMovieChunk] = useState(
@@ -45,7 +90,6 @@ const VotingView = ({ navigation }) => {
         },
 ])
 
-
 // GENERATES AND RETURNS STRING CONTAINING URL TO ALL OF A SPECIFIED MOVIE'S DATA
     const getPosterPath = (num) => {
         return "https://api.themoviedb.org/3/movie/" + num.toString() + "?api_key=d68f62b1dd987551ff4793fc96f457f1"
@@ -60,16 +104,16 @@ const VotingView = ({ navigation }) => {
             })
     }
 
-    useEffect(() => {
-            setLoaded(true)
-    },[currentMovie])
+    // useEffect(() => {
+    //         setLoaded(true)
+    // },[currentMovie])
 
     const getHeroImage = (uri, handleVotePress) => {
         return (
             <HeroImage
             id={Date.now()}
             style={{height:"100%", width:"100%"}}
-            poster={currentMovie}
+            // poster={currentMovie}
             navigation={navigation}
             source={{"uri":uri}}
             handleVotePress={handleVotePress}
@@ -99,8 +143,11 @@ const VotingView = ({ navigation }) => {
         {loaded ? 
             <>
             <Swiper style={styles.wrapper} showsButtons={true} loop={false}
-            prevButton={<VotingButton handleVotePress={handleVotePress} text="no" boolVal={false}/>} 
-            nextButton={<VotingButton handleVotePress={handleVotePress} text="yes" boolVal={true}/>}>
+            prevButton={<VotingButton getMovies={runQuery} 
+            // handleVotePress={handleVotePress}
+             text="no" boolVal={false}/>} 
+            // nextButton={<VotingButton handleVotePress={handleVotePress} text="yes" boolVal={true}/>}
+            >
                 <View style={styles.slide1}>
                     {getHeroImage(movieChunk[0].uri, handleVotePress)}
                 </View>

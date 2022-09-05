@@ -1,38 +1,8 @@
 import React, { useState, useContext, useEffect } from "react"
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Keyboard, useWindowDimensions, Alert } from "react-native"
-import { useMutation, gql } from "@apollo/client"
+import { useQuery, useMutation, gql, ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client"
+
 import AppContext from "./AppContext"
-
-    const USER_LOGIN_CHECK = gql`
-    mutation createUser($input: CreateUserInput!) {
-        createUser(input: $input) {
-            user {
-                name
-                id
-            }
-        }
-    }
-    `
-
-const userData = [
-    {
-        "userName": "User1",
-        "userId": "211269"
-    },
-    {
-        "userName": "User2",
-        "userId": "216944"
-    },
-    {
-        "userName": "User3",
-        "userId": "420244"
-    },
-    {
-        "userName": "LOOK-AT-THIS",
-        "userId": "420699"
-    },
-]
-
 
 const LoginForm = ({navigation}) => {
     const globals = useContext(AppContext);
@@ -40,53 +10,77 @@ const LoginForm = ({navigation}) => {
     const [userNameValue, setUserNameValue] = useState("")
     const [loginError, setLoginError] = useState(false)
 
-const [userLogin, { data, loading, error }] = useMutation(USER_LOGIN_CHECK, { 
-        variables: {"input": {"name": globals.userInfo }}, 
-        // onCompleted: () => navigation.navigate("CreateEventView") 
-        onCompleted: () => testInfo(data)
-    })
-
-    const testInfo = (data) => {
-        console.log("POST SENT")
-        navigation.navigate("CreateEventView")
-        // NEW //
-
-        globals.setAllUserEvents(data)
-        console.log("allUserEvents GLOBAL: ", globals.allUserEvents)
-
-        // END //
-        console.log("----------------")
+    //          GRAPHQL MUTATION            //
+const USER_LOGIN_CHECK = gql`
+mutation createUser($input: CreateUserInput!) {
+    createUser(input: $input) {
+        user {
+            id
+            name
+        }
     }
+}`
 
-        // RUNS ON BUTTON PRESS
+//          LOGIN                               //  
+// 1. 
     const runLogin = (e) => {
         e.preventDefault()
+        validateLogin()
+    }
+// 2.
+    const validateLogin = () => {
         if (!userNameValue) {
             return Alert.alert("Please enter a username")
         }
         if (userNameValue) {
-            console.log("TEXT INPUT FIELD VALUE: ", userNameValue)
+            console.log("userNameValue: ", userNameValue)
             globals.setUserInfo(userNameValue)
-            globals.setLoggedIn(true)
             userLogin()
         }
     }
+// 3.
+    const [userLogin, { data, loading, error }] = useMutation(USER_LOGIN_CHECK, { 
+        variables: {"input": {"name": userNameValue }}, 
+        onCompleted: (data) => onCompleted(data)
+    })
+// 4.
+    const onCompleted = (data) => {
+        console.log("> POST COMPLETED <")
+        console.log("Good ol' data: ", data)
+        console.log("id: ", data.createUser.user.id)
+        console.log("name: ", data.createUser.user.name)
 
-    useEffect(() => {
-        console.log("useEffect: --", userNameValue)
-    },[userNameValue])
+        globals.setLoggedIn(true)
+        console.log("userInfo GLOBAL: ", globals.userInfo)
+
+        navigation.navigate("CreateEventView")
+        console.log("----------------")
+    }
+
+    //      ^^^^^^^ GRAPHQL ^^^^^^^^            //
 
     useEffect(() => {
         if (!globals.loggedIn){
-            console.log("Please log in.")
+            console.log("useEffect LoginForm: Please enter a username")
             return
         } else {
-            console.log("----------------")
-            console.log("USER LOGIN TRIGGERED")
+            console.log(">USER IS LOGGED IN<")
             console.log(`You are now logged in, ${globals.userInfo}`)
+            console.log("----------------")
             return
         }
     },[globals.loggedIn])
+
+    useEffect(() => {
+        if (!globals.userInfo){
+            console.log("useEffect LoginForm: No globals.userInfo")
+            return
+        } else {
+            console.log(`GLOBALS.USERINFO: ${globals.userInfo}`)
+            console.log("----------------")
+            return
+        }
+    },[globals.userInfo])
 
   
     return(

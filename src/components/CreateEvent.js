@@ -1,7 +1,13 @@
-import React, { useState } from "react"
+//IMPORTS
+import React, { useState, useContext } from "react"
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from "react-native"
+
+//LIBRARIES
+import { useQuery, useMutation, gql } from "@apollo/client"
+
+//COMPONENTS
 import EventsList from "./EventsList"
-import { useMutation, gql } from "@apollo/client"
+import AppContext from "./AppContext"
 
 const CREATE_USER_EVENT = gql`
     mutation createEvent($eventId: eventId!, $userId: Userid!, $date: date!) {
@@ -12,6 +18,18 @@ const CREATE_USER_EVENT = gql`
         }
     }
 `
+
+//GRAPHQL QUERY
+const GET_MOVIE_CHUNK = gql`
+    query getChunk($eventId: ID!, $lastMovieId: ID!){
+        getChunk (eventId: $eventId, lastMovieId: $lastMovieId){
+            id
+            image
+            title
+        }
+    }`
+
+
     // mutation {
     //     createEvent(input: {
     //         date: "9/1/2022",
@@ -42,29 +60,21 @@ const CREATE_USER_EVENT = gql`
     //     }
     //   }
     
-    // OUR ORIGINAL SETUP:
-    // mutation CreateEvent($eventId: eventId!, $userId:Userid!) {
-    //     CreateEvent(eventName: $eventName, userid: $userId) {
-    //         userId
-    //         eventName
-    //     }
-    // }
-
-    // {
-    //     "data": {
-    //         "CreateUser": {
-    //             "userName": "User2",
-    //             "userId": "211270"
-    //         }
-    //     }
-    // }
-
     const CreateEvent = ({navigation, userId}) => {
-    const [eventName, setEventName] = useState("")
-    const [createEvent, { data, loading, error }] = useMutation(CREATE_USER_EVENT, { 
-        variables: {eventName: eventName, userId: 12345}, 
-        onCompleted: () => goToEvent() 
+        const globals = useContext(AppContext)
+        const [eventName, setEventName] = useState("")
+
+    //      GRAPHQL GET MOVIE CHUNK       //
+        //GRAPHQL QUERY
+        const { data, loading, error } = useQuery(GET_MOVIE_CHUNK, { 
+        // SHOULD NOT BE HARD CODED; needs state
+            variables: {"eventId": 2, "lastMovieId": 5 }, 
     })
+
+    // const [createEvent, { data, loading, error }] = useMutation(CREATE_USER_EVENT, { 
+    //     variables: {eventName: eventName, userId: 12345}, 
+    //     onCompleted: () => goToEvent() 
+    // })
 
     const goToEvent = () => {
         navigation.navigate("Voting", {eventId: data.JoinEvent.eventId})
@@ -78,18 +88,21 @@ const CREATE_USER_EVENT = gql`
     const handleAddEventPress = (e, navigation) => {
         e.preventDefault()
         console.log("create event pressed")
-        const newEvent = {
-            id: Date.now(),
-            eventName
-        }
-        navigation.navigate("CreateEventView")
+        console.log(data)
+
+
+        // const newEvent = {
+        //     id: Date.now(),f
+        //     eventName
+        // }
+        // navigation.navigate("CreateEventView")
+        // navigation.navigate("VotingView")
     }
 
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
             <View
                 style={styles.createEventFormContainer}>
-                    {/* {console.log(data)} */}
                 <View
                     style={styles.inputButtonContainer}>
                     <TextInput
@@ -107,9 +120,9 @@ const CREATE_USER_EVENT = gql`
                                 +</Text>
                     </TouchableOpacity>
                     {/* <EventsList data={data}/> */}
-                    {loading && <Text>Creating event...</Text>}
+                    {/* {loading && <Text>Creating event...</Text>}
                     {error && <Text>There was a problem creating your event</Text>}
-                    {data && <Text>{data.JoinEvent.eventId}</Text>}
+                    {data && <Text>{data.JoinEvent.eventId}</Text>} */}
                 </View>
             </View>
         </TouchableWithoutFeedback>
