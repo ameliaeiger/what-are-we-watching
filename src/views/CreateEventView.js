@@ -4,7 +4,7 @@ import { Text, View, StyleSheet, Dimensions, Modal, Alert, TouchableOpacity } fr
 import AppContext from "../components/AppContext.js";
 
 //ADDITIONAL LIBRARIES
-// import { BlurView } from 'expo-blur';
+import { BlurView } from 'expo-blur';
 
 //COMPONENTS
 import CreateEvent from "../components/CreateEvent.js"
@@ -15,14 +15,16 @@ import { useQuery, gql } from "@apollo/client"
 
 
 const GET_ALL_EVENTS = gql`
-  {
-        events {
-        hostId
-        guestId
-        name
-        status
-        }
+{
+  events {
+    name
+    date
+    status
+    userId
+    guestId
+    movieSelectionId
   }
+}
 `
 
 const DATA = [

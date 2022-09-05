@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react"
 import { Button } from "react-native"
 import { NavigationContainer, useNavigation } from '@react-navigation/native'
 import { createNativeStackNavigator} from '@react-navigation/native-stack'
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client"
+import { ApolloClient, InMemoryCache, ApolloProvider, useQuery, gql } from "@apollo/client"
 import AppContext from "./src/components/AppContext"
 
 //VIEWS
@@ -23,23 +23,25 @@ const client = new ApolloClient ({
   cache: new InMemoryCache(),
 })
 
-
 export default function App() {
-  const [allUserEvents, setAllUserEvents] = useState("")
+  const [currentUserEvents, setCurrentUserEvents] = useState("")
   const [currentEvent, setCurrentEvent] = useState("")
   const [loggedIn, setLoggedIn] = useState(false)
   const [userInfo, setUserInfo] = useState("")
+  const [allEvents, setAllEvents] = useState("")
 
   const globals = {
     loggedIn: loggedIn,
     userInfo: userInfo,
     currentEvent: currentEvent,
-    allUserEvents: allUserEvents,
+    currentUserEvents: currentUserEvents,
+    allEvents: allEvents,
 
     setUserInfo: setUserInfo,
     setCurrentEvent: setCurrentEvent,
-    setAllUserEvents: setAllUserEvents,
+    setCurrentUserEvents: setCurrentUserEvents,
     setLoggedIn: setLoggedIn,
+    setAllEvents: setAllEvents
   }
 
   const LoginScreen = ({navigation}) => {
@@ -81,7 +83,7 @@ export default function App() {
     const userLogout = (navigation) => {
       setUserInfo("")
       setCurrentEvent("")
-      setAllUserEvents("")
+      setCurrentUserEvents("")
       setLoggedIn(false)
       navigation.navigate("Landing")
       console.log("> USER LOGOUT <")

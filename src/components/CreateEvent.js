@@ -9,6 +9,7 @@ import { useQuery, useMutation, gql } from "@apollo/client"
 import EventsList from "./EventsList"
 import AppContext from "./AppContext"
 
+//QUERIES - GRAPHQL
 const CREATE_USER_EVENT = gql`
     mutation createEvent($eventId: eventId!, $userId: Userid!, $date: date!) {
         createEvent(input: {name: $name, userId: $userId, date: $date}) {
@@ -19,7 +20,6 @@ const CREATE_USER_EVENT = gql`
     }
 `
 
-//GRAPHQL QUERY
 const GET_MOVIE_CHUNK = gql`
     query getChunk($eventId: ID!, $lastMovieId: ID!){
         getChunk (eventId: $eventId, lastMovieId: $lastMovieId){
@@ -66,10 +66,10 @@ const GET_MOVIE_CHUNK = gql`
 
     //      GRAPHQL GET MOVIE CHUNK       //
         //GRAPHQL QUERY
-        const { data, loading, error } = useQuery(GET_MOVIE_CHUNK, { 
+        // const { data, loading, error } = useQuery(GET_MOVIE_CHUNK, { 
         // SHOULD NOT BE HARD CODED; needs state
-            variables: {"eventId": 2, "lastMovieId": 5 }, 
-    })
+    //         variables: {"eventId": 2, "lastMovieId": 5 }, 
+    // })
 
     // const [createEvent, { data, loading, error }] = useMutation(CREATE_USER_EVENT, { 
     //     variables: {eventName: eventName, userId: 12345}, 
@@ -85,10 +85,10 @@ const GET_MOVIE_CHUNK = gql`
         setEventName(text)
     }
 
-    const handleAddEventPress = (e, navigation) => {
-        e.preventDefault()
+    const handleAddEventPress = (navigation) => {
         console.log("create event pressed")
-        console.log(data)
+        console.log(eventData.data)
+        // console.log(events)
 
 
         // const newEvent = {
@@ -113,7 +113,7 @@ const GET_MOVIE_CHUNK = gql`
                         />
                     <TouchableOpacity
                         title="Create Event"
-                        onPress={(e) => handleAddEventPress(e, navigation)}
+                        onPress={() => handleAddEventPress(navigation)}
                         style={styles.createEventButton}>
                         <Text
                             style={styles.createEventButtonText}>
