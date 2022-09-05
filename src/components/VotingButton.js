@@ -1,12 +1,13 @@
 import React from "react"
 import { TouchableOpacity, StyleSheet, Text } from "react-native"
 
-const VotingButton = ({ handleVotePress, text, boolVal }) => {
+const VotingButton = ({ getMovies, handleVotePress, text, boolVal }) => {
     return (
         <>
         <TouchableOpacity
             title={text}
-            onPress={(e) => handleVotePress(e, boolVal)}
+            // onPress={(e) => handleVotePress(e, boolVal)}
+            onPress={(e) => getMovies(e)}
             // style={styles.buttonNo}
             >
             <Text>{text}</Text>

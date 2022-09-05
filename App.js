@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react"
 import { Button } from "react-native"
 import { NavigationContainer, useNavigation } from '@react-navigation/native'
 import { createNativeStackNavigator} from '@react-navigation/native-stack'
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client"
+import { ApolloClient, InMemoryCache, ApolloProvider, useQuery, gql } from "@apollo/client"
 import AppContext from "./src/components/AppContext"
 
 //VIEWS
@@ -19,21 +19,29 @@ const Stack = createNativeStackNavigator()
 
 //APOLLO
 const client = new ApolloClient ({
-  uri: 'https://7faa1aa4-3de7-4b85-8d00-12221883cecb.mock.pstmn.io/graphql/events',
+  uri: 'https://what-are-we-watching-be.herokuapp.com/graphql',
   cache: new InMemoryCache(),
 })
-// uri: 'https://what-are-we-watching-be.herokuapp.com/graphql',
-
 
 export default function App() {
+  const [currentUserEvents, setCurrentUserEvents] = useState("")
+  const [currentEvent, setCurrentEvent] = useState("")
   const [loggedIn, setLoggedIn] = useState(false)
   const [userInfo, setUserInfo] = useState("")
+  const [allEvents, setAllEvents] = useState("")
 
   const globals = {
     loggedIn: loggedIn,
-    setLoggedIn: setLoggedIn,
     userInfo: userInfo,
-    setUserInfo: setUserInfo
+    currentEvent: currentEvent,
+    currentUserEvents: currentUserEvents,
+    allEvents: allEvents,
+
+    setUserInfo: setUserInfo,
+    setCurrentEvent: setCurrentEvent,
+    setCurrentUserEvents: setCurrentUserEvents,
+    setLoggedIn: setLoggedIn,
+    setAllEvents: setAllEvents
   }
 
   const LoginScreen = ({navigation}) => {
@@ -64,12 +72,21 @@ export default function App() {
     return ({
       headerRight: () => (
       <Button
-          onPress={() => navigation.navigate("Landing")}
+          onPress={() => userLogout(navigation)}
           title="logout"
           color="#F37180"
         />
       ),
       })
+    }
+
+    const userLogout = (navigation) => {
+      setUserInfo("")
+      setCurrentEvent("")
+      setCurrentUserEvents("")
+      setLoggedIn(false)
+      navigation.navigate("Landing")
+      console.log("> USER LOGOUT <")
     }
 
   return (
