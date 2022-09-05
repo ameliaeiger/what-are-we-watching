@@ -44,7 +44,7 @@ const LoginForm = ({navigation}) => {
         validateLogin()
 
         let mappedEvents = eventData.data.events.map((event) => {
-            let eventObject = {
+            return {
             name: event.name,
             host: event.userId,
             date: event.date,
@@ -52,7 +52,6 @@ const LoginForm = ({navigation}) => {
             status: event.status,
             movie: event.movieSelection
             }
-            return eventObject
         })
 
         console.log("-----> EVENTS MAPPED <-----")

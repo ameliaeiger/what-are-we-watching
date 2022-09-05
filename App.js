@@ -77,8 +77,16 @@ export default function App() {
           color="#F37180"
         />
       ),
+      headerLeft: () => (
+        <Button
+            onPress={() => navigation.navigate("CreateEventView")}
+            title=">>>"
+            color="#F37180"
+          />
+        ),
       })
     }
+
 
     const userLogout = (navigation) => {
       setUserInfo("")
@@ -94,7 +102,8 @@ export default function App() {
         <AppContext.Provider value={globals}>
           <NavigationContainer>
             <Stack.Navigator>
-              <Stack.Screen name='Landing' component={LoginScreen} options={{title:"login"}} />
+              <Stack.Screen name='Landing' component={LoginScreen} options={logoutOption} />
+              {/* <Stack.Screen name='Landing' component={LoginScreen} options={{title:"login"}} /> */}
               <Stack.Screen name='CreateEventView' component={PartyScreen} options={logoutOption} />
               <Stack.Screen name='VotingView' component={SwipingScreen} options={logoutOption} />
               <Stack.Screen name='Results' component={MatchScreen} options={logoutOption} />

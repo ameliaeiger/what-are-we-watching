@@ -139,6 +139,10 @@ const DATA = [
     //   }
     // }
 
+    useEffect(() => {
+      // console.log("GLOBALS: ", globals.allEvents)
+    },[globals.allEvents])
+
     return(
       <BlurView intensity={100} tint="dark" style={`styles.${blurOn}`}>
         <View style={{height:windowHeight, width:windowWidth}}>   

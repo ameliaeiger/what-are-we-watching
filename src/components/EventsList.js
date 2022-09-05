@@ -16,9 +16,9 @@ const EventsList = ({ navigation, toggleModal }) => {
             <Text
                 style={styles.eventsListText}>Events</Text>
             <FlatList
-                // data={allUserEvents}
+                data={globals.allEvents}
                 contentContainerStyle={{flexGrow:1}}
-                renderItem={({item}) => (<EventListItem title={item.name} guest={item.guestId} navigation={navigation} toggleModal={toggleModal} />)}
+                renderItem={({item}) => (<EventListItem title={item.name} guest={item.guest} navigation={navigation} toggleModal={toggleModal} />)}
                 keyExtractor={item => item.name}/>
       </View>
     )
