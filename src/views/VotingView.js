@@ -26,8 +26,9 @@ const GET_MOVIE_CHUNK = gql`
 
 //VOTING VIEW
 const VotingView = ({ navigation }) => {
-    // CONSTANTS
-    const globals = useContext(AppContext)
+    
+// CONSTANTS
+const globals = useContext(AppContext)
 
     // useEffect(() => {
     //     console.log(globals.currentEvent)
@@ -77,6 +78,22 @@ const VotingView = ({ navigation }) => {
         },
 ])
 
+    //GRAPHQL QUERY
+    // const [getMovies, { data, loading, error }] = useQuery(GET_MOVIE_CHUNK, { 
+    //     variables: {"eventId": eventId, "lastMovieId": lastMovieId },
+    //     onCompleted: () => onCompleted(data)
+    //     })
+
+    //     const runQuery = () => {
+    //             console.log("run query triggered")
+    //             // const { data, loading, error } = useQuery(GET_MOVIE_CHUNK, { 
+    //             // variables: {"eventId": 0, "lastMovieId": 0 }, 
+    //         // })
+    //         console.log("loading: ", loading)
+    //         console.log("RUN QUERY: ", data)
+    //     }
+    // })
+
 // GENERATES AND RETURNS STRING CONTAINING URL TO ALL OF A SPECIFIED MOVIE'S DATA
     const getPosterPath = (num) => {
         return "https://api.themoviedb.org/3/movie/" + num.toString() + "?api_key=d68f62b1dd987551ff4793fc96f457f1"
@@ -104,7 +121,7 @@ const VotingView = ({ navigation }) => {
             navigation={navigation}
             source={{"uri":uri}}
             handleVotePress={handleVotePress}
-         />
+            />
         )
     }
 
@@ -124,16 +141,17 @@ const VotingView = ({ navigation }) => {
         }
         setCurrentMovieIndex(currentMovieIndex+1)
     }
-   
+
     return(
         <>
-        <Text>You are in: {globals.currentEvent}!</Text>
+        <Text style={styles.headerText}>
+            You are in: {globals.currentEvent}!</Text>
         {loaded ? 
             <>
             <Swiper style={styles.wrapper} showsButtons={true} loop={false}
             prevButton={<VotingButton getMovies={runQuery} 
             // handleVotePress={handleVotePress}
-             text="no" boolVal={false}/>} 
+            text="no" boolVal={false}/>} 
             // nextButton={<VotingButton handleVotePress={handleVotePress} text="yes" boolVal={true}/>}
             >
                 <View style={styles.slide1}>
@@ -169,6 +187,11 @@ const VotingView = ({ navigation }) => {
 export default VotingView
 
 const styles = StyleSheet.create({
+    headerText: {
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        // backgroundColor: '#92BBD9'
+    },
     buttonNo: {
         display:"flex",
         alignItems:"center",
@@ -223,16 +246,3 @@ const styles = StyleSheet.create({
   }
 })
 
-
-    //GRAPHQL QUERY
-    // const [getMovies, { data, loading, error }] = useQuery(GET_MOVIE_CHUNK, { 
-    // const runQuery = () => {
-    //     console.log("run query triggered")
-    //         const { data, loading, error } = useQuery(GET_MOVIE_CHUNK, { 
-    //         variables: {"eventId": 0, "lastMovieId": 0 }, 
-    //         onCompleted: () => onCompleted(data)
-    //     })
-    //     console.log("loading: ", loading)
-    //     console.log("RUN QUERY: ", data)
-    // }
-            // variables: {"eventId": eventId, "lastMovieId": lastMovieId }, 

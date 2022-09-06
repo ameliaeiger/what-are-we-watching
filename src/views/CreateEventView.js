@@ -14,18 +14,18 @@ import EventsList from "../components/EventsList.js"
 import { useQuery, gql } from "@apollo/client"
 
 //GRAPHQL
-const GET_ALL_EVENTS = gql`
-{
-  events {
-    name
-    date
-    status
-    userId
-    guestId
-    movieSelectionId
-  }
-}
-`
+// const GET_ALL_EVENTS = gql`
+// {
+//   events {
+//     name
+//     date
+//     status
+//     userId
+//     guestId
+//     movieSelectionId
+//   }
+// }
+// `
 
 //CREATE EVENT VIEW
   const CreateEventView = ({ navigation }) => {

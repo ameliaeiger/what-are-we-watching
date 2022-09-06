@@ -42,18 +42,18 @@ const GET_MOVIE_CHUNK = gql`
         })
 
         const onCompleted = (response) => {
-            console.log("completed")
-            console.log(response)
+            console.log('45', "completed")
+            console.log('46', response)
         }
 
         const runCreateEvent = () => {
             if (!eventName) {
-                console.log("Please your event a name")
+                console.log("Please enter your event a name")
             } else {
                 console.log("run create event triggered line 53")
-                console.log(globals.userInfo)
-                console.log(globals.currentUser)
-                // createEvent()
+                console.log('54', globals.userInfo)
+                console.log('55', globals.currentUser)
+                createEvent()
             }
 
         }
@@ -76,7 +76,7 @@ const GET_MOVIE_CHUNK = gql`
 
     const handleAddEventPress = (navigation) => {
         console.log("create event pressed")
-        console.log(eventData.data)
+        console.log('79', eventData.data)
         // console.log(events)
 
 
@@ -108,10 +108,10 @@ const GET_MOVIE_CHUNK = gql`
                             style={styles.createEventButtonText}>
                                 +</Text>
                     </TouchableOpacity>
-                    {/* <EventsList data={data}/> */}
-                    {/* {loading && <Text>Creating event...</Text>}
+                    {/* <EventsList data={data}/>  */}
+                    {loading && <Text>Creating event...</Text>}
                     {error && <Text>There was a problem creating your event</Text>}
-                    {data && <Text>{data.JoinEvent.eventId}</Text>} */}
+                    {/* {data && <Text>{data.JoinEvent.eventId}</Text>} */}
                 </View>
             </View>
         </TouchableWithoutFeedback>

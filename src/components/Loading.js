@@ -7,7 +7,7 @@ const Loading= () => {
             style={styles.loadingContainer}>
             <Text
                 style={styles.loadingText}>
-                LOADING
+                LOADING!!!
             </Text>
         </View>
     )
