@@ -16,9 +16,11 @@ const EventsList = ({ navigation, click }) => {
                 style={styles.eventsListText}>Events</Text>
             <FlatList
                 data={globals.allEvents}
-                contentContainerStyle={{flexGrow:1}}
+                extraData={globals.allEvents}
+                initialNumToRender={4}
+                // contentContainerStyle={{flexGrow:1}}
                 renderItem={({item}) => (<EventListItem event={item} title={item.name} guest={item.guest} navigation={navigation} onClick={click} />)}
-                keyExtractor={item => item.name}/>
+                keyExtractor={item => item.id}/>
       </View>
     )
 }
