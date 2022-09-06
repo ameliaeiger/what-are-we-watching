@@ -43,8 +43,20 @@ const LoginForm = ({navigation}) => {
         e.preventDefault()
         validateLogin()
 
-        let mappedEvents = eventData.data.events.map((event) => {
+        let mappedEvents = eventData.data.events.map((event, index) => {
+            if (event.name == "awesomeevent"){
+                return {
+                    id: index,
+                    name: `fuckthisevent ${index}`,
+                    host: event.userId,
+                    date: event.date,
+                    guest: event.guestId,
+                    status: event.status,
+                    movie: event.movieSelection
+                    }
+            }
             return {
+            id: index,
             name: event.name,
             host: event.userId,
             date: event.date,
@@ -55,18 +67,21 @@ const LoginForm = ({navigation}) => {
         })
 
         console.log("-----> EVENTS MAPPED <-----")
+        console.log()
         console.log(mappedEvents)
         globals.setAllEvents(mappedEvents)
+        console.log()
         console.log("----------------------------------------------------------------------------------------------------")
     };
 
 // 2.
     const validateLogin = () => {
         if (!userNameValue) {
-            return Alert.alert("Please enter a username")
+            navigation.navigate("CreateEventView")
+            // return Alert.alert("Please enter a username")
         }
         if (userNameValue) {
-            console.log("userNameValue: ", userNameValue)
+            console.log("> ...loggin in... <")
             globals.setUserInfo(userNameValue)
             userLogin()
         }
@@ -78,40 +93,40 @@ const LoginForm = ({navigation}) => {
     })
 // 4.
     const onCompleted = (data) => {
-        console.log("> POST COMPLETED <")
+        console.log()
+        console.log("> USER LOGIN SUCCESS! <")
         console.log("Good ol' data: ", data)
         console.log("id: ", data.createUser.user.id)
         console.log("name: ", data.createUser.user.name)
+        console.log()
 
         globals.setLoggedIn(true)
-        console.log("userInfo GLOBAL: ", globals.userInfo)
-
         navigation.navigate("CreateEventView")
-        console.log("----------------")
+        console.log("------------------------------------------------------------------------------------------------")
     }
 
-    useEffect(() => {
-        if (!globals.loggedIn){
-            console.log("useEffect LoginForm: Please enter a username")
-            return
-        } else {
-            console.log(">USER IS LOGGED IN<")
-            console.log(`You are now logged in, ${globals.userInfo}`)
-            console.log("----------------")
-            return
-        }
-    },[globals.loggedIn])
+    // useEffect(() => {
+    //     if (!globals.loggedIn){
+    //         console.log("useEffect LoginForm: Please enter a username")
+    //         return
+    //     } else {
+    //         console.log(">USER IS LOGGED IN<")
+    //         console.log(`You are now logged in, ${globals.userInfo}`)
+    //         console.log("----------------")
+    //         return
+    //     }
+    // },[globals.loggedIn])
 
-    useEffect(() => {
-        if (!globals.userInfo){
-            console.log("useEffect LoginForm: No globals.userInfo")
-            return
-        } else {
-            console.log(`GLOBALS.USERINFO: ${globals.userInfo}`)
-            console.log("----------------")
-            return
-        }
-    },[globals.userInfo])
+    // useEffect(() => {
+    //     if (!globals.userInfo){
+    //         console.log("useEffect LoginForm: No globals.userInfo")
+    //         return
+    //     } else {
+    //         console.log(`GLOBALS.USERINFO: ${globals.userInfo}`)
+    //         console.log("----------------")
+    //         return
+    //     }
+    // },[globals.userInfo])
 
   
     return(

@@ -1,12 +1,11 @@
 //IMPORTS
 import React, { useContext } from "react"
-import { View, Text, FlatList, StyleSheet } from "react-native"
-import AppContext from "../components/AppContext.js";
+import { View, Text, FlatList, StyleSheet, TouchableOpacity } from "react-native"
+import AppContext from "../components/AppContext.js"
 
-//COMPONENTS
-import EventListItem from "./EventListItem"
 
-const EventsList = ({ navigation, toggleModal }) => {
+// EVENTS LIST
+const EventsList = ({ navigation, click }) => {
     const globals = useContext(AppContext)
 
 
@@ -18,9 +17,19 @@ const EventsList = ({ navigation, toggleModal }) => {
             <FlatList
                 data={globals.allEvents}
                 contentContainerStyle={{flexGrow:1}}
-                renderItem={({item}) => (<EventListItem title={item.name} guest={item.guest} navigation={navigation} toggleModal={toggleModal} />)}
+                renderItem={({item}) => (<EventListItem event={item} title={item.name} guest={item.guest} navigation={navigation} onClick={click} />)}
                 keyExtractor={item => item.name}/>
       </View>
+    )
+}
+
+// LIST ITEM - INDIVIDUAL EVENT 
+const EventListItem = ({ event, title, navigation, onClick, guest }) => {
+
+    return (
+      <TouchableOpacity style={styles.eventButton} onPress={(e) => onClick(e, event, title)}>
+        <Text style={{fontSize:20}}>{title}</Text>
+      </TouchableOpacity>
     )
 }
 
@@ -38,4 +47,14 @@ const styles = StyleSheet.create({
     eventsListText: {
         color:"#544E50"
     },
+    eventButton: {
+        display:"flex",
+        alignItems:"center",
+        justifyContent:"center",
+        backgroundColor:"#F37180",
+        height:50,
+        width:350,
+        margin:10,
+        borderRadius:20
+      },
 })

@@ -77,7 +77,7 @@ export default function App() {
           color="#F37180"
         />
       ),
-      headerLeft: () => (
+      headerMiddle: () => (
         <Button
             onPress={() => navigation.navigate("CreateEventView")}
             title=">>>"

@@ -13,7 +13,7 @@ import EventsList from "../components/EventsList.js"
 //APOLLO
 import { useQuery, gql } from "@apollo/client"
 
-
+//GRAPHQL
 const GET_ALL_EVENTS = gql`
 {
   events {
@@ -27,28 +27,15 @@ const GET_ALL_EVENTS = gql`
 }
 `
 
-const DATA = [
-    {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-      date: 'August 31st',
-    },
-    {
-      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-      date: 'September 12th',
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d72',
-      date: 'September 22nd',
-    },
-  ]
-
+//CREATE EVENT VIEW
   const CreateEventView = ({ navigation }) => {
     const globals = useContext(AppContext)
-    // console.log("CreateEventView Context: ", globals.userInfo)
     const [modalVisible, setModalVisible] = useState(false)
     const [blurOn, setBlurOn] = useState(false)
     const [eventName, setEventName] = useState("")
-    const {data, loading, error} = useQuery(GET_ALL_EVENTS)
+    const [userEvent, setUserEvent] = useState("")
+
+    // const {data, loading, error} = useQuery(GET_ALL_EVENTS)
     const windowWidth = Dimensions.get('window').width
     const windowHeight = Dimensions.get('window').height
 
@@ -58,11 +45,31 @@ const DATA = [
     //   getEvents()
     // },[])
 
-    const handleGoToPartyPress = (e, navigation) => {
+
+    //NAVIGATES TO VOTINGVIEW
+    const confirmPartyPress = (e, navigation, title) => {
       e.preventDefault()
       setModalVisible(!modalVisible)
+      globals.setCurrentEvent(title)
       navigation.navigate("VotingView")
     }
+    //PROMPTS MODAL
+    const listItemClick = (e, event, title) => {
+      setModalVisible(true)
+      console.log(`go to ${title} pressed`)
+      setEventName(title)
+      setUserEvent(event)
+
+      // globals.setCurrentEvent(event)
+  }
+
+  useEffect(() => {
+    if (userEvent){
+    console.log("---------------------- > USER JOINED EVENT < ----------------------")
+    console.log(userEvent)
+    console.log("-----------------------------------------------------------------")
+    }
+  },[userEvent])
 
     const modal = () => {
       return (
@@ -83,13 +90,13 @@ const DATA = [
                 <Text style={{marginBottom:20}}>Ready to get started?</Text>
                 <TouchableOpacity
                   style={[styles.button, styles.buttonConfirm]}
-                  onPress={(e) => handleGoToPartyPress(e, navigation)}
+                  onPress={(e) => confirmPartyPress(e, navigation, eventName)}
                 >
                   <Text style={styles.textStyle}>Let's Go!</Text>
                 </TouchableOpacity>                
                 <TouchableOpacity
                   style={[styles.button, styles.buttonClose]}
-                  onPress={() => setModalVisible(!modalVisible)}
+                  onPress={() => setModalVisible(false)}
                 >
                   <Text style={styles.textStyle}>Back</Text>
                 </TouchableOpacity>
@@ -97,24 +104,7 @@ const DATA = [
             </View>
           </Modal>
         </View>
-      )}
-    
-    const toggleModal = (e, title) => {
-      //HANDLE EVENT
-      e.preventDefault()
-      console.log(`go to ${title} pressed`)
-      setEventName(title)
-  
-      //NAVIGATE
-      // navigation.navigate("PartyView", {
-      //   eventTitle:title
-      // })
-
-      //SET MODAL VISIBLE STATE "TRUE"
-      setModalVisible(true)
-    }
-
-    //END
+    )}
 
     const getDisplay = () => {
       // if (loading){
@@ -122,26 +112,26 @@ const DATA = [
       // } else if  (!loading && !error && data) {
         return(
           <EventsList
-            toggleModal={toggleModal}
+            click={listItemClick}
             navigation={navigation} />
           )
     }
 
-    // useEffect(() => {
-    //   toggleBlur()
-    // },[modalVisible])
-
-    // const toggleBlur = () => {
-    //   if (modalVisible){
-    //     setBlurOn("blurContainer")
-    //   } else {
-    //     setBlurOn("blurContainerHidden")
-    //   }
-    // }
-
     useEffect(() => {
+      console.log(modalVisible)
+    },[modalVisible])
+
+    const toggleBlur = () => {
+      if (modalVisible){
+        setBlurOn("blurContainer")
+      } else {
+        setBlurOn("blurContainerHidden")
+      }
+    }
+
+    // useEffect(() => {
       // console.log("GLOBALS: ", globals.allEvents)
-    },[globals.allEvents])
+    // },[globals.allEvents])
 
     return(
       <BlurView intensity={100} tint="dark" style={`styles.${blurOn}`}>
