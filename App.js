@@ -24,6 +24,7 @@ const client = new ApolloClient ({
 })
 
 export default function App() {
+  const [currentUser, setCurrentUser] = useState("")
   const [currentUserEvents, setCurrentUserEvents] = useState("")
   const [currentEvent, setCurrentEvent] = useState("")
   const [loggedIn, setLoggedIn] = useState(false)
@@ -32,11 +33,14 @@ export default function App() {
 
   const globals = {
     loggedIn: loggedIn,
+    //this is actually just username lmfao 
     userInfo: userInfo,
+    currentUser: currentUser,
     currentEvent: currentEvent,
     currentUserEvents: currentUserEvents,
     allEvents: allEvents,
 
+    setCurrentUser: setCurrentUser,
     setUserInfo: setUserInfo,
     setCurrentEvent: setCurrentEvent,
     setCurrentUserEvents: setCurrentUserEvents,

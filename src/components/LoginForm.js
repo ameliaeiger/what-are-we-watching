@@ -100,6 +100,7 @@ const LoginForm = ({navigation}) => {
         console.log("name: ", data.createUser.user.name)
         console.log()
 
+        globals.setCurrentUser(data.createUser.user)
         globals.setLoggedIn(true)
         navigation.navigate("CreateEventView")
         console.log("------------------------------------------------------------------------------------------------")
