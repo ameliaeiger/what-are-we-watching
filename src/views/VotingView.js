@@ -24,26 +24,14 @@ const GET_MOVIE_CHUNK = gql`
         }
     }`
 
+//VOTING VIEW
 const VotingView = ({ navigation }) => {
-    // NEW //
-    // CONTEXT
+    // CONSTANTS
     const globals = useContext(AppContext)
 
-    //GRAPHQL QUERY
-
-
-    // const [getMovies, { data, loading, error }] = useQuery(GET_MOVIE_CHUNK, { 
-    // const runQuery = () => {
-    //     console.log("run query triggered")
-    //         const { data, loading, error } = useQuery(GET_MOVIE_CHUNK, { 
-    //         variables: {"eventId": 0, "lastMovieId": 0 }, 
-    //         onCompleted: () => onCompleted(data)
-    //     })
-    //     console.log("loading: ", loading)
-    //     console.log("RUN QUERY: ", data)
-    // }
-            // variables: {"eventId": eventId, "lastMovieId": lastMovieId }, 
-
+    // useEffect(() => {
+    //     console.log(globals.currentEvent)
+    // },[])
 
     const onCompleted = (data) => {
         console.log("----------------")
@@ -56,7 +44,6 @@ const VotingView = ({ navigation }) => {
         // navigation.navigate("CreateEventView")
         console.log("----------------")
     }
-    // END //
 
     
     // const [currentMovie, setCurrentMovie] = query(movieData.poster_path)
@@ -140,6 +127,7 @@ const VotingView = ({ navigation }) => {
    
     return(
         <>
+        <Text>You are in: {globals.currentEvent}!</Text>
         {loaded ? 
             <>
             <Swiper style={styles.wrapper} showsButtons={true} loop={false}
@@ -234,3 +222,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   }
 })
+
+
+    //GRAPHQL QUERY
+    // const [getMovies, { data, loading, error }] = useQuery(GET_MOVIE_CHUNK, { 
+    // const runQuery = () => {
+    //     console.log("run query triggered")
+    //         const { data, loading, error } = useQuery(GET_MOVIE_CHUNK, { 
+    //         variables: {"eventId": 0, "lastMovieId": 0 }, 
+    //         onCompleted: () => onCompleted(data)
+    //     })
+    //     console.log("loading: ", loading)
+    //     console.log("RUN QUERY: ", data)
+    // }
+            // variables: {"eventId": eventId, "lastMovieId": lastMovieId }, 

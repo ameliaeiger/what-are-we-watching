@@ -11,14 +11,15 @@ import AppContext from "./AppContext"
 
 //QUERIES - GRAPHQL
 const CREATE_USER_EVENT = gql`
-    mutation createEvent($eventId: eventId!, $userId: Userid!, $date: date!) {
-        createEvent(input: {name: $name, userId: $userId, date: $date}) {
-            date
-            userId
-            name
+    mutation createEvent($input: CreateEventInput!) {
+        createEvent(input: $input) {
+            event {
+                date
+                name
+                userId
+            }
         }
-    }
-`
+    }`
 
 const GET_MOVIE_CHUNK = gql`
     query getChunk($eventId: ID!, $lastMovieId: ID!){
@@ -29,40 +30,37 @@ const GET_MOVIE_CHUNK = gql`
         }
     }`
 
-
-    // mutation {
-    //     createEvent(input: {
-    //         date: "9/1/2022",
-    //         name: "Parker",
-    //         userId: 1
-    //     }) {
-    //         event {
-    //             date
-    //             name
-    //             userId
-    //     }
-    //         errors
-    //     }
-    // }
-
-    // mutation {
-    //     createEvent(input: {
-    //       date: "9/1/2022",
-    //       name: "Parker",
-    //       $userId:Userid!
-    //     }) {
-    //       event {
-    //         date
-    //         name
-    //         userId
-    //       }
-    //       errors
-    //     }
-    //   }
-    
     const CreateEvent = ({navigation, userId}) => {
         const globals = useContext(AppContext)
         const [eventName, setEventName] = useState("")
+
+
+        //GRAPHQL MUTATION/POST REQUEST
+        const [createEvent, {data, loading, error}] = useMutation(CREATE_USER_EVENT, {
+            variables:{"input": {"date": "2022-09-05", "name": eventName, "userId": parseInt(globals.currentUser.id)}},
+            onCompleted: (response) => onCompleted(response)
+        })
+
+        const onCompleted = (response) => {
+            console.log("completed")
+            console.log(response)
+        }
+
+        const runCreateEvent = () => {
+            if (!eventName) {
+                console.log("Please your event a name")
+            } else {
+                console.log("run create event triggered line 53")
+                console.log(globals.userInfo)
+                console.log(globals.currentUser)
+                // createEvent()
+            }
+
+        }
+
+       
+
+
 
     //      GRAPHQL GET MOVIE CHUNK       //
         //GRAPHQL QUERY
@@ -70,15 +68,6 @@ const GET_MOVIE_CHUNK = gql`
         // SHOULD NOT BE HARD CODED; needs state
     //         variables: {"eventId": 2, "lastMovieId": 5 }, 
     // })
-
-    // const [createEvent, { data, loading, error }] = useMutation(CREATE_USER_EVENT, { 
-    //     variables: {eventName: eventName, userId: 12345}, 
-    //     onCompleted: () => goToEvent() 
-    // })
-
-    const goToEvent = () => {
-        navigation.navigate("Voting", {eventId: data.JoinEvent.eventId})
-    }
 
     const handleEventInput = (text) => {
         console.log('input', text)
@@ -113,7 +102,7 @@ const GET_MOVIE_CHUNK = gql`
                         />
                     <TouchableOpacity
                         title="Create Event"
-                        onPress={() => handleAddEventPress(navigation)}
+                        onPress={() => runCreateEvent()}
                         style={styles.createEventButton}>
                         <Text
                             style={styles.createEventButtonText}>
