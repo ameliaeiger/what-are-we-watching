@@ -4,6 +4,7 @@
 - [About the Project](#about-the-project)
 - [Technologies Used](#technologies-used)
 - [Project Spec](#project-spec)
+- [Wireframe](#wireframe)
 - [Setup instructions](#set-up-instructions)
 - [Learning Goals](#learning-goals)
 - [Contributors](#contributors)
@@ -32,6 +33,11 @@ an existing event), and votes on what to watch. As soon as there is a match, the
 ## Project Spec:
 [Project Spec](https://mod4.turing.edu/projects/capstone/index.html)
 
+## Wireframe
+
+[Wireframe](https://www.figma.com/file/k7SxtEgctcEvAkuzyLmRjL/Untitled?node-id=0%3A1)
+
+
 ## Setup Instructions:
 To run the application on a local machine:
 - Install Xcode to run the simulator.
@@ -39,9 +45,9 @@ To run the application on a local machine:
 - `cd` into the application.
 - Run `npm install` to install all the project dependencies.
 - Run `npm start` to see the application.
-  - Press `i` to start iOS simulation.
+  - Press `i` to start iOS simulation and check other options to start it!
   - If you need to stop running the application, run `Control + C`.
-  - You can also download the Expo Go app and scan the QR code that appears to run the app on your phone.
+  - You can also download the `Expo Go` app and scan the QR code that appears to run the app on your phone.
   
 ## Learning Goals and Project Reflections:
 ### Learning Goals
