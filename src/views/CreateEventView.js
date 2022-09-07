@@ -119,7 +119,7 @@ import { useQuery, gql } from "@apollo/client"
 
     useEffect(() => {
       console.log(modalVisible)
-    },[modalVisible])
+    },[modalVisible, eventName])
 
     const toggleBlur = () => {
       if (modalVisible){
