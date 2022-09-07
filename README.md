@@ -47,7 +47,7 @@ To run the application on a local machine:
 - If you need to stop running the application, run `Control + C`.
 - You can also download the `Expo Go` app and scan the QR code that appears to run the app on your phone.
   
-## Learning Goals and Project Reflections:
+## Learning Goals:
 ### Learning Goals
 * Self-teach new technologies quickly
 * Write reusable components, and create a single page for events
@@ -56,11 +56,12 @@ To run the application on a local machine:
 
 ## Contributors:
 **Nathan Hodnett**
-[GitHub](https://github.com/nhodnett)
+* [GitHub](https://github.com/nhodnett)
+* [LinkedIn](https://www.linkedin.com/in/nathan-h-200a4710/)
 
 **Betul Baskan**
-[GitHub](https://github.com/Baskanbetul)
-[LinkedIn](https://www.linkedin.com/in/betul-baskan/)
+* [GitHub](https://github.com/Baskanbetul)
+* [LinkedIn](https://www.linkedin.com/in/betul-baskan/)
 
 
 ## Project Managers:
