@@ -4,27 +4,33 @@
 - [About the Project](#about-the-project)
 - [Technologies Used](#technologies-used)
 - [Project Spec](#project-spec)
-- [Set Up Instructions](#set-up-instructions)
+- [Setup instructions](#set-up-instructions)
 - [Learning Goals](#learning-goals)
 - [Contributors](#contributors)
-- [Project Manager](#project-manager)
+- [Project Managers](#project-managers)
 
 ## About the project:
+What Are We Watching is mobile application designed to help people make a decision on what to watch together. 
+We have all been in a situation where you sit down to watch something with a friend, partner or family member, 
+only to spend 30 mins trying to agree on what to watch.
+
+What Are We Watching helps to solve that issue by matching users choices via the app. A user creates an event, (or joins
+an existing event), and votes on what to watch. As soon as there is a match, the decision is made!
 
 ## Technologies Used:
 * Github
-* React
+* React Native
 * HTML5
 * CSS
 
 ## Github Repo:
-[Github Repo]
+[Github Repo](https://github.com/What-Are-We-Watching/What-Are-We-Watching-FE)
 
 ## Demo:
-![Demo]
+![Demo](https://media.giphy.com/media/5LYC2AC30x4FZzG4hB/giphy.gif)
 
 ## Project Spec:
-[Project Spec]
+[Project Spec](https://mod4.turing.edu/projects/capstone/index.html)
 
 ## Setup Instructions:
 To run the application on a local machine:
@@ -39,12 +45,15 @@ To run the application on a local machine:
   
 ## Learning Goals and Project Reflections:
 ### Learning Goals
-* Practice using React, Router, Asynchronous Javascript and Cypress end to end testing.
-* Implementing Prop Types.
-* Deploy the React App using Heroku.
+* Practice using React Native & GraphQL.
+
+* Working with a Back End team for the first time.
 
 ## Contributors:
 * [Nathan Hodnett](https://github.com/nhodnett)
+* [Betul Baskan](https://github.com/Baskanbetul)
 
 
-## Project Manager:
+## Project Managers:
+* Meg Stang
+* Nik Seif
