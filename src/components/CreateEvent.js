@@ -1,15 +1,15 @@
 //IMPORTS
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from "react-native"
 
-//LIBRARIES
+//APOLLO
 import { useQuery, useMutation, gql } from "@apollo/client"
 
 //COMPONENTS
 import EventsList from "./EventsList"
 import AppContext from "./AppContext"
 
-//QUERIES - GRAPHQL
+//GRAPHQL MUTATION
 const CREATE_USER_EVENT = gql`
     mutation createEvent($input: CreateEventInput!) {
         createEvent(input: $input) {
@@ -21,44 +21,51 @@ const CREATE_USER_EVENT = gql`
         }
     }`
 
-const GET_MOVIE_CHUNK = gql`
-    query getChunk($eventId: ID!, $lastMovieId: ID!){
-        getChunk (eventId: $eventId, lastMovieId: $lastMovieId){
-            id
-            image
-            title
+// const GET_MOVIE_CHUNK = gql`
+//     query getChunk($eventId: ID!, $lastMovieId: ID!){
+//         getChunk (eventId: $eventId, lastMovieId: $lastMovieId){
+//             id
+//             image
+//             title
+//         }
+//     }`
+
+//CREATE EVENT
+const CreateEvent = ({navigation, userId}) => {
+    const globals = useContext(AppContext)
+    const [eventName, setEventName] = useState("")
+    const [isClicked, setIsClicked] = useState(false)
+    // const movieData = useQuery(GET_MOVIE_CHUNK)
+
+
+    //GRAPHQL MUTATION/POST REQUEST
+    const [createEvent, {data, loading, error}] = useMutation(CREATE_USER_EVENT, {
+        variables:{"input": {"date": "2022-09-05", "name": eventName, "userId": parseInt(globals.currentUser.id)}},
+        onCompleted: (response) => onCompleted(response)
+    })
+
+    const onCompleted = (response) => {
+        console.log('45', "completed")
+        console.log('46', response)
+    }
+
+    const runCreateEvent = () => {
+        setIsClicked(true)
+        if (!eventName) {
+            console.log("Please enter your event name")
+        } else {
+            console.log("run create event triggered line 53")
+            console.log('54', globals.userInfo)
+            console.log('55', globals.currentUser)
+            console.log('55', globals.allEvents)
+            createEvent()
         }
-    }`
+    }
 
-    const CreateEvent = ({navigation, userId}) => {
-        const globals = useContext(AppContext)
-        const [eventName, setEventName] = useState("")
-
-
-        //GRAPHQL MUTATION/POST REQUEST
-        const [createEvent, {data, loading, error}] = useMutation(CREATE_USER_EVENT, {
-            variables:{"input": {"date": "2022-09-05", "name": eventName, "userId": parseInt(globals.currentUser.id)}},
-            onCompleted: (response) => onCompleted(response)
-        })
-
-        const onCompleted = (response) => {
-            console.log("completed")
-            console.log(response)
-        }
-
-        const runCreateEvent = () => {
-            if (!eventName) {
-                console.log("Please your event a name")
-            } else {
-                console.log("run create event triggered line 53")
-                console.log(globals.userInfo)
-                console.log(globals.currentUser)
-                // createEvent()
-            }
-
-        }
-
-       
+    // useEffect(() => {
+    //    // globals.allEvents
+    //         console.log('63', eventName)
+    //     },[isClicked])
 
 
 
@@ -76,7 +83,7 @@ const GET_MOVIE_CHUNK = gql`
 
     const handleAddEventPress = (navigation) => {
         console.log("create event pressed")
-        console.log(eventData.data)
+        console.log('79', eventData.data)
         // console.log(events)
 
 
@@ -108,10 +115,10 @@ const GET_MOVIE_CHUNK = gql`
                             style={styles.createEventButtonText}>
                                 +</Text>
                     </TouchableOpacity>
-                    {/* <EventsList data={data}/> */}
+                    {/* <EventsList data={data}/>  */}
                     {/* {loading && <Text>Creating event...</Text>}
-                    {error && <Text>There was a problem creating your event</Text>}
-                    {data && <Text>{data.JoinEvent.eventId}</Text>} */}
+                    {error && <Text>There was a problem creating your event</Text>} */}
+                    {/* {data && <Text>{data.JoinEvent.eventId}</Text>} */}
                 </View>
             </View>
         </TouchableWithoutFeedback>

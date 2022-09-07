@@ -7,16 +7,16 @@ import VotingButton from "./VotingButton"
 const HeroImage = ({source, navigation, handleVotePress}) => {
     const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;
-    // const [image, setImage] = useState("")
+    const [image, setImage] = useState("")
 
 
-    // useEffect(() => {
-    //     setImage(
-    //         {
-    //             uri: `https://image.tmdb.org/t/p/original/${poster}`
-    //         }
-    //     )
-    // },[])
+    useEffect(() => {
+        setImage(
+            {
+                uri: `https://image.tmdb.org/t/p/original/${poster}`
+            }
+        )
+    },[])
 
     return (
         <View

@@ -47,7 +47,7 @@ const LoginForm = ({navigation}) => {
             if (event.name == "awesomeevent"){
                 return {
                     id: index,
-                    name: `fuckthisevent ${index}`,
+                    name: `event ${index}`,
                     host: event.userId,
                     date: event.date,
                     guest: event.guestId,
@@ -95,7 +95,7 @@ const LoginForm = ({navigation}) => {
     const onCompleted = (data) => {
         console.log()
         console.log("> USER LOGIN SUCCESS! <")
-        console.log("Good ol' data: ", data)
+        console.log("data: ", data)
         console.log("id: ", data.createUser.user.id)
         console.log("name: ", data.createUser.user.name)
         console.log()
@@ -149,9 +149,9 @@ const LoginForm = ({navigation}) => {
                                 style={styles.buttonText}>
                                     Login</Text>
                         </TouchableOpacity>
-                        {/* {loading && <Text>Logging you in...</Text>}
+                        {loading && <Text>Logging you in...</Text>}
                         {loginError && <Text>User does not exist</Text>}
-                        {data && <Text>{data.CreateUser.userName}</Text>} */}
+                        {data && <Text>{data.CreateUser.userName}</Text>}
                     </View>
                 </View>
             </TouchableWithoutFeedback>

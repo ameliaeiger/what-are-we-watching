@@ -39,6 +39,7 @@ export default EventsList
 
 const styles = StyleSheet.create({
     eventsContainer: {
+        flex: 1,
         height:"100%",
         width:"100%", 
         display:"flex", 
@@ -47,6 +48,7 @@ const styles = StyleSheet.create({
         backgroundColor:"white",
     },
     eventsListText: {
+        flex: 1,
         color:"#544E50"
     },
     eventButton: {
